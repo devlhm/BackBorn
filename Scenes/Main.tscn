@@ -1,0 +1,436 @@
+[gd_scene load_steps=56 format=3 uid="uid://dy3ltwjcfjppl"]
+
+[ext_resource type="Script" path="res://Scripts/overworld_controller.gd" id="1_b4mba"]
+[ext_resource type="MeshLibrary" uid="uid://cgtve3xcwfkv0" path="res://MeshLibraries/props2.tres" id="2_jwnj0"]
+[ext_resource type="Texture2D" uid="uid://dayii0h8h7ehs" path="res://Assets/Textures/grass1_0.png" id="3_8ajcb"]
+[ext_resource type="Script" path="res://Scripts/camera.gd" id="4_74wgl"]
+[ext_resource type="Script" path="res://Scripts/interactable_test.gd" id="5_23by2"]
+[ext_resource type="PackedScene" uid="uid://phglwtybhfkr" path="res://Components/interactable_component.tscn" id="6_a8ogv"]
+[ext_resource type="PackedScene" uid="uid://be6iu86y5xs51" path="res://Scenes/player.tscn" id="6_bl3uf"]
+[ext_resource type="PackedScene" uid="uid://wtbak16ffexb" path="res://Components/dialog_component.tscn" id="7_jtt2p"]
+[ext_resource type="Texture2D" uid="uid://boc7xmpb0ser2" path="res://Assets/PropSprites/dead_tree/dead_tree_0_n.png" id="9_2xw8a"]
+[ext_resource type="Texture2D" uid="uid://di1kw6y5k130r" path="res://Assets/PropSprites/test_tree/pedra.png" id="10_ig8k4"]
+[ext_resource type="Texture2D" uid="uid://cdknhyodc8tbq" path="res://Assets/PropSprites/test_tree/test_tree_shaded.png" id="10_ueiai"]
+[ext_resource type="Texture2D" uid="uid://san4v7jdfgmn" path="res://Assets/PropSprites/test_tree/test_tree_normal_map_nobg.png" id="11_cihxu"]
+[ext_resource type="Texture2D" uid="uid://d0mofwtxjdiqu" path="res://Assets/PropSprites/test_tree/pedra_normalmap.png" id="11_jaase"]
+[ext_resource type="Texture2D" uid="uid://dc6lmqfysdvhe" path="res://Assets/PropSprites/test_tree/test_tree_unshaded.png" id="12_tkv7a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eqkum"]
+sky_horizon_color = Color(0.741348, 0.704677, 0.685539, 1)
+ground_bottom_color = Color(0.580392, 0.364706, 0.192157, 1)
+ground_horizon_color = Color(0.741348, 0.704677, 0.685539, 1)
+
+[sub_resource type="Sky" id="Sky_5pr7a"]
+sky_material = SubResource("ProceduralSkyMaterial_eqkum")
+
+[sub_resource type="Environment" id="Environment_g5oug"]
+background_mode = 2
+sky = SubResource("Sky_5pr7a")
+ambient_light_source = 3
+ambient_light_color = Color(0.92549, 0.584314, 0.0313726, 1)
+ambient_light_energy = 3.31
+reflected_light_source = 2
+ssao_radius = 5.8
+ssao_intensity = 15.68
+sdfgi_use_occlusion = true
+fog_light_color = Color(0.94, 0.59408, 0.0376, 1)
+fog_light_energy = 0.4
+fog_sun_scatter = 2.0
+volumetric_fog_albedo = Color(0.868336, 0.546342, 0.0192985, 1)
+volumetric_fog_ambient_inject = 1.0
+adjustment_brightness = 1.08
+adjustment_saturation = 1.41
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ko1j4"]
+albedo_color = Color(0.388235, 0.917647, 0.501961, 1)
+albedo_texture = ExtResource("3_8ajcb")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_us6bs"]
+material = SubResource("StandardMaterial3D_ko1j4")
+size = Vector2(300, 600)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfxui"]
+points = PackedVector3Array(-300, 0, -300, -300, 0, 300, 300, 0, -300, 300, 0, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjeel"]
+albedo_color = Color(0.662745, 0.313726, 0.0745098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x8aws"]
+material = SubResource("StandardMaterial3D_jjeel")
+size = Vector2(300, 600)
+
+[sub_resource type="Animation" id="Animation_rloar"]
+resource_name = "A"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_67drv"]
+_data = {
+"A": SubResource("Animation_rloar")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uu8iy"]
+load_path = "res://.godot/imported/dead_tree_0.png-0650e09e6457db1af29e2abd255665f3.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xuw62"]
+transparency = 2
+alpha_scissor_threshold = 0.422
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.15
+depth_draw_mode = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("CompressedTexture2D_uu8iy")
+normal_texture = ExtResource("9_2xw8a")
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_yea8m"]
+material = SubResource("StandardMaterial3D_xuw62")
+size = Vector2(3, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fli8u"]
+size = Vector3(2, 2.3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i08gh"]
+transparency = 2
+alpha_scissor_threshold = 0.258
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.0
+no_depth_test = true
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("10_ig8k4")
+normal_enabled = true
+normal_texture = ExtResource("11_jaase")
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_fpbqs"]
+material = SubResource("StandardMaterial3D_i08gh")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nhk4o"]
+load_path = "res://.godot/imported/dead_tree_0.png-0650e09e6457db1af29e2abd255665f3.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hygum"]
+noise_type = 3
+frequency = 0.0089
+offset = Vector3(-4.4, 0, 0)
+fractal_octaves = 6
+fractal_lacunarity = 1.645
+fractal_gain = 0.73
+fractal_weighted_strength = 0.8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_omy3o"]
+noise = SubResource("FastNoiseLite_hygum")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_obqgc"]
+transparency = 2
+alpha_scissor_threshold = 0.422
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.15
+albedo_texture = SubResource("CompressedTexture2D_nhk4o")
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+heightmap_enabled = true
+heightmap_texture = SubResource("NoiseTexture2D_omy3o")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_cvh4p"]
+material = SubResource("StandardMaterial3D_obqgc")
+size = Vector2(3, 3)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ddamh"]
+noise_type = 3
+frequency = 0.0089
+offset = Vector3(-4.4, 0, 0)
+fractal_octaves = 6
+fractal_lacunarity = 1.645
+fractal_gain = 0.73
+fractal_weighted_strength = 0.8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ldalv"]
+noise = SubResource("FastNoiseLite_ddamh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdi26"]
+transparency = 2
+alpha_scissor_threshold = 0.422
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.15
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("10_ueiai")
+normal_enabled = true
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+heightmap_enabled = true
+heightmap_texture = SubResource("NoiseTexture2D_ldalv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_pwi3o"]
+material = SubResource("StandardMaterial3D_vdi26")
+size = Vector2(3, 3)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jwudv"]
+load_path = "res://.godot/imported/test_tree_shaded.png-358e865fcf66bcfdaf561ac0f4b2bedd.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kt1y3"]
+noise_type = 3
+frequency = 0.0089
+offset = Vector3(-4.4, 0, 0)
+fractal_octaves = 6
+fractal_lacunarity = 1.645
+fractal_gain = 0.73
+fractal_weighted_strength = 0.8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3xjo"]
+noise = SubResource("FastNoiseLite_kt1y3")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ptjl"]
+load_path = "res://.godot/imported/test_tree_normal_map_nobg.png-e3e5b7d64598e80d658bb7cfe0b4225c.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mcyk"]
+transparency = 2
+alpha_scissor_threshold = 0.422
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.15
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("CompressedTexture2D_jwudv")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_0ptjl")
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+heightmap_texture = SubResource("NoiseTexture2D_t3xjo")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_t5cli"]
+material = SubResource("StandardMaterial3D_0mcyk")
+size = Vector2(3, 3)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2b4wt"]
+noise_type = 3
+frequency = 0.0089
+offset = Vector3(-4.4, 0, 0)
+fractal_octaves = 6
+fractal_lacunarity = 1.645
+fractal_gain = 0.73
+fractal_weighted_strength = 0.8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4l7fj"]
+noise = SubResource("FastNoiseLite_2b4wt")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdifn"]
+load_path = "res://.godot/imported/test_tree_normal_map_nobg.png-e3e5b7d64598e80d658bb7cfe0b4225c.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xkp2t"]
+transparency = 2
+alpha_scissor_threshold = 0.422
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.15
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("12_tkv7a")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_gdifn")
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+heightmap_texture = SubResource("NoiseTexture2D_4l7fj")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_qr8et"]
+material = SubResource("StandardMaterial3D_xkp2t")
+size = Vector2(3, 3)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_15ejs"]
+load_path = "res://.godot/imported/test_tree_unshaded.png-bf56c61d5d4c53f17e8f261216fc5d64.s3tc.ctex"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f0i5f"]
+noise_type = 3
+frequency = 0.0089
+offset = Vector3(-4.4, 0, 0)
+fractal_octaves = 6
+fractal_lacunarity = 1.645
+fractal_gain = 0.73
+fractal_weighted_strength = 0.8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m1yty"]
+noise = SubResource("FastNoiseLite_f0i5f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exlhu"]
+transparency = 2
+alpha_scissor_threshold = 0.422
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.15
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("CompressedTexture2D_15ejs")
+normal_texture = ExtResource("11_cihxu")
+rim = 0.85
+rim_tint = 0.0
+anisotropy = 1.0
+ao_enabled = true
+heightmap_texture = SubResource("NoiseTexture2D_m1yty")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_qwolb"]
+material = SubResource("StandardMaterial3D_exlhu")
+size = Vector2(3, 3)
+
+[node name="Overworld" type="Node3D" node_paths=PackedStringArray("player") groups=["overworld_controller"]]
+script = ExtResource("1_b4mba")
+player = NodePath("Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g5oug")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.750111, 0.661312, 0, -0.661312, 0.750111, 0, 0, 0)
+visible = false
+light_energy = 3.0
+shadow_enabled = true
+shadow_blur = 0.5
+
+[node name="Props" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12, 0)
+visible = false
+mesh_library = ExtResource("2_jwnj0")
+data = {
+"cells": PackedInt32Array(115, 69, 0, 2, 5, 0, 12, 65534, 15, 3, 65530, 16, 8, 65533, 17, 7, 65526, 17, 16, 65535, 17, -65525, 65534, 8, -65530, 65534, 7, -65525, 65530, 8, -65521, 65534, 6, -65532, 65531, 7, 4, 65535, 16, 13, 65529, 16, 19, 65528, 16, -65531, 65530, 11, -65532, 65533, 9, -65521, 65535, 9, -65518, 65531, 10, -65527, 65527, 10, -65531, 65526, 10, -65534, 65534, 10, -65535, 65531, 10, -65529, 65532, 589834, -3, 65532, 589834, -9, 65525, 589834, -65533, 65534, 589838, -65535, 65533, 589837, -65530, 65531, 589836, -65534, 65527, 589836, -65528, 65534, 589836, -65531, 65535, 720908, -65518, 65535, 720910, -65518, 65533, 720910, -65524, 65526, 720910, -65519, 65528, 720910, -65529, 65528, 720910, -65527, 65531, 720909, -15, 65534, 1507337, -20, 65525, 1507337, -8, 65534, 1507339, -7, 65534, 1507339, -2, 65534, 1507339, -4, 65524, 1507339, -22, 65529, 1507339, 65531, 65534, 1, 65520, 65533, 1, 65518, 65524, 1, 65533, 65530, 1, 65523, 65530, 2, 65508, 65524, 2, 65524, 65527, 4, 65532, 1, 4, 65530, 65525, 4, 65526, 65535, 5, 65518, 65530, 5, 65527, 65531, 0, 65523, 65533, 1, 65529, 65529, 1)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, 0)
+sorting_offset = -10.0
+mesh = SubResource("PlaneMesh_us6bs")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_mfxui")
+
+[node name="Ground2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 0)
+mesh = SubResource("PlaneMesh_x8aws")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_mfxui")
+
+[node name="Interactable" type="Node3D" parent="." groups=["dialog"]]
+script = ExtResource("5_23by2")
+
+[node name="InteractableComponent" parent="Interactable" instance=ExtResource("6_a8ogv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+monitorable = false
+
+[node name="DialogComponent" parent="Interactable" groups=["dialog_component"] instance=ExtResource("7_jtt2p")]
+visible = false
+first_dialog_path = "res://Dialogues/test.json"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_67drv")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.57673, 2.58072)
+current = true
+fov = 60.0
+size = 6.714
+script = ExtResource("4_74wgl")
+smoothSpeed = 3
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+light_energy = 2.0
+
+[node name="Player" parent="." instance=ExtResource("6_bl3uf")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0.293204, 0)
+floor_max_angle = 0.261799
+
+[node name="dead_tree_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 4, 0.868301, 3)
+mesh = SubResource("QuadMesh_yea8m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="dead_tree_0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dead_tree_0/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.400001, -0.0999999)
+shape = SubResource("BoxShape3D_fli8u")
+
+[node name="dead_tree_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 1, 0.176777, -2)
+visible = false
+mesh = SubResource("QuadMesh_fpbqs")
+
+[node name="dead_tree_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 0.8, 0)
+visible = false
+mesh = SubResource("QuadMesh_cvh4p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="dead_tree_1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dead_tree_1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_fli8u")
+
+[node name="tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 1.335, 0)
+visible = false
+mesh = SubResource("QuadMesh_pwi3o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tree"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_fli8u")
+
+[node name="tree2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 1.335, 0)
+visible = false
+mesh = SubResource("QuadMesh_t5cli")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tree2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_fli8u")
+
+[node name="tree3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 1.335, 0)
+visible = false
+mesh = SubResource("QuadMesh_qr8et")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tree3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_fli8u")
+
+[node name="tree4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.335, 0)
+visible = false
+mesh = SubResource("QuadMesh_qwolb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tree4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_fli8u")

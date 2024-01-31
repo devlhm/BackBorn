@@ -1,0 +1,137 @@
+[gd_scene load_steps=26 format=3 uid="uid://be6iu86y5xs51"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_kxhcj"]
+[ext_resource type="Texture2D" uid="uid://2e0wek1eix08" path="res://Assets/Characters/Player/frisk_6walk-removebg-preview.png" id="2_cuiht"]
+[ext_resource type="Texture2D" uid="uid://h6mdbmnxxuuy" path="res://Assets/Characters/Player/frisk_7walk-removebg-preview.png" id="3_r0kka"]
+[ext_resource type="Texture2D" uid="uid://cxbswydt16hys" path="res://Assets/Characters/Player/frisk_3walk-removebg-preview.png" id="4_7mdau"]
+[ext_resource type="Texture2D" uid="uid://jghsx42y18yu" path="res://Assets/Characters/Player/frisk_10walk-removebg-preview.png" id="4_57amj"]
+[ext_resource type="Texture2D" uid="uid://bsbeu75jm1ruw" path="res://Assets/Characters/Player/frisk_8walk-removebg-preview.png" id="4_eybgg"]
+[ext_resource type="Texture2D" uid="uid://cjnlvnnmqniss" path="res://Assets/Characters/Player/frisk_9walk-removebg-preview.png" id="5_8uhl4"]
+[ext_resource type="Texture2D" uid="uid://r0apadyuwjab" path="res://Assets/Characters/Player/frisk_0walk-removebg-preview.png" id="5_13ctr"]
+[ext_resource type="Texture2D" uid="uid://3x2vbxijbi6r" path="res://Assets/Characters/Player/frisk_1walk-removebg-preview.png" id="6_e45bb"]
+[ext_resource type="Texture2D" uid="uid://cx1ynho4jckpi" path="res://Assets/Characters/Player/frisk_5walk-removebg-preview.png" id="6_uxekq"]
+[ext_resource type="Texture2D" uid="uid://c15av8ff64i33" path="res://Assets/Characters/Player/frisk_11walk-removebg-preview.png" id="7_0qo8u"]
+[ext_resource type="Texture2D" uid="uid://cirnhtowpkjdi" path="res://Assets/Characters/Player/frisk_12walk-removebg-preview.png" id="7_dkkal"]
+[ext_resource type="Texture2D" uid="uid://ouql6xq5idie" path="res://Assets/Characters/Player/frisk_4walk-removebg-preview.png" id="7_m18gq"]
+[ext_resource type="Texture2D" uid="uid://ctrduxfiw4ywa" path="res://Assets/Characters/Player/frisk_13walk-removebg-preview.png" id="8_km4bd"]
+[ext_resource type="Texture2D" uid="uid://c7a02gcdi12rg" path="res://Assets/Characters/Player/frisk_14walk-removebg-preview.png" id="9_p6y22"]
+[ext_resource type="Texture2D" uid="uid://b765jrwjcr0g1" path="res://Assets/Characters/Player/frisk_15walk-removebg-preview.png" id="10_r3n0o"]
+[ext_resource type="Texture2D" uid="uid://c1bki5ot0l2ax" path="res://Assets/Characters/Player/frisk_16walk-removebg-preview.png" id="11_vfbmi"]
+[ext_resource type="Texture2D" uid="uid://cykfsk6rjrhwr" path="res://Assets/Characters/Player/frisk_17walk-removebg-preview.png" id="12_4o44o"]
+[ext_resource type="Texture2D" uid="uid://cdne4pin7w4c7" path="res://Assets/Characters/Player/frisk_19walk-removebg-preview.png" id="13_2ic2q"]
+[ext_resource type="Texture2D" uid="uid://cxxs6fbg2dga8" path="res://Assets/Characters/Player/frisk_20walk-removebg-preview.png" id="14_vrpu3"]
+[ext_resource type="Texture2D" uid="uid://cokwarchri5xd" path="res://Assets/Characters/Player/frisk_21walk-removebg-preview.png" id="15_sbcj8"]
+[ext_resource type="Texture2D" uid="uid://b5yilcge2a7lj" path="res://Assets/Characters/Player/frisk_22walk-removebg-preview.png" id="16_3flaf"]
+[ext_resource type="Texture2D" uid="uid://7hlao88hqoa1" path="res://Assets/Characters/Player/frisk_23walk-removebg-preview.png" id="17_yxosc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iyo42"]
+size = Vector3(0.512104, 0.940031, 0.134399)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xy2jm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_e45bb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_13ctr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m18gq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uxekq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7mdau")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_km4bd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p6y22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dkkal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vfbmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r3n0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4o44o")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2ic2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vrpu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_sbcj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3flaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_yxosc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_sbcj8")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_r0kka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eybgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cuiht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_57amj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0qo8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8uhl4")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_kxhcj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_iyo42")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+sorting_offset = 9.0
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_xy2jm")
+animation = &"walk_down"
+frame_progress = 0.344158

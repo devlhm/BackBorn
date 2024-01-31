@@ -1,0 +1,14 @@
+{
+	"S1": {
+		"type": "speech",
+		"text": [
+			"It's over"
+		],
+		"to": "end",
+		"sprite": "test/test",
+		"name": "Test"
+	},
+	"end": {
+		"next": "none"
+	}
+}

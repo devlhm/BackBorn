@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://unfbero7fgq5"]
+
+[ext_resource type="Texture2D" uid="uid://df2cglaqixcg4" path="res://Assets/PropSprites/dead_tree/dead_tree_5.png" id="1_awj0f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_urvu0"]
+size = Vector3(1, 1.5, 0.2)
+
+[node name="dead_tree_5" type="StaticBody3D"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_urvu0")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+shaded = true
+alpha_cut = 2
+texture = ExtResource("1_awj0f")
