@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/dead_tree_4.png-66b410cda4f1a6df292234926bcf3
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=true
-compress/lossy_quality=0.7
+compress/lossy_quality=0.8
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0

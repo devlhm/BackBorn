@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://hamshmhhyym0"]
+
+[ext_resource type="Texture2D" uid="uid://c60lw8fa1xx5j" path="res://Assets/PropSprites/yellow_flower/yellow_flower_2.png" id="1_a12xt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fusr7"]
+transparency = 2
+alpha_scissor_threshold = 0.39
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_a12xt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_740ri"]
+material = SubResource("StandardMaterial3D_fusr7")
+
+[node name="Flower" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+visibility_range_end = 50.0
+mesh = SubResource("QuadMesh_740ri")

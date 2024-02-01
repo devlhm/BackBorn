@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bafcixpy6ee47"]
+
+[ext_resource type="Texture2D" uid="uid://cgcpebtwdky7m" path="res://Assets/PropSprites/grass_tuft/grass_tuft_2.png" id="1_m25rc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wj4g1"]
+transparency = 2
+alpha_scissor_threshold = 0.059
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_m25rc")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_8hbxd"]
+material = SubResource("StandardMaterial3D_wj4g1")
+size = Vector2(0.2, 0.2)
+
+[node name="Grass" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+visibility_range_end = 10.0
+visibility_range_fade_mode = 1
+mesh = SubResource("QuadMesh_8hbxd")

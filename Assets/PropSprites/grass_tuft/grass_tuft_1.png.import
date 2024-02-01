@@ -17,7 +17,7 @@ dest_files=["res://.godot/imported/grass_tuft_1.png-ee56daec2720c43f6e19f64cab34
 
 compress/mode=0
 compress/high_quality=true
-compress/lossy_quality=0.7
+compress/lossy_quality=0.8
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0

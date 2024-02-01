@@ -6,8 +6,6 @@ var playerOffset: Vector3
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerOffset = position - player.position
-	look_at(player.position)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
