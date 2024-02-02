@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://be7senprsr2km"]
-
-[ext_resource type="PackedScene" uid="uid://oeuhj70socd4" path="res://Scenes/Props/Trees/dead_tree_4.tscn" id="1_wwcyo"]
-
-[node name="Tiles" type="Node3D"]
-
-[node name="dead_tree_4" parent="." instance=ExtResource("1_wwcyo")]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://wtbak16ffexb"]
 
 [ext_resource type="Script" path="res://Scripts/dialog_component.gd" id="1_3u4tc"]
-[ext_resource type="PackedScene" uid="uid://cqd0r6hd4sqvt" path="res://Scenes/dialog_button.tscn" id="2_tfypj"]
+[ext_resource type="PackedScene" uid="uid://cqd0r6hd4sqvt" path="res://Scenes/UI/dialog_button.tscn" id="2_tfypj"]
 [ext_resource type="Texture2D" uid="uid://xk8ji70ohc0a" path="res://Assets/Icons/inverted-triangle.png" id="3_3gleh"]
 
 [sub_resource type="Animation" id="Animation_eguve"]

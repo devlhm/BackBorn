@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SavedGame" load_steps=2 format=3 uid="uid://dkux1csmcebp7"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/saved_game.gd" id="1_u10gs"]
+
+[resource]
+script = ExtResource("1_u10gs")
+player_stats = {
+"faith": 1,
+"hearing": 1,
+"sight": 1,
+"smell": 1,
+"taste": 1,
+"touch": 1
+}

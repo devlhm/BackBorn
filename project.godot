@@ -17,14 +17,18 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-JSONHelper="*res://Scripts/Utils/json_helper.gd"
+JSONHelper="*res://Scripts/Autoloads/Utils/json_helper.gd"
+PlayerStats="*res://Scripts/Autoloads/player_stats.gd"
+SaveManager="*res://Scripts/Autoloads/Utils/save_manager.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -41,3 +45,6 @@ interact={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+anti_aliasing/quality/msaa_2d=3
+anti_aliasing/quality/msaa_3d=3
+anti_aliasing/quality/screen_space_aa=1

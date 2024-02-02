@@ -1,0 +1,630 @@
+[gd_scene load_steps=8 format=3 uid="uid://gtt58lpvkv8"]
+
+[ext_resource type="Script" path="res://Scripts/UI/skills_menu.gd" id="1_3poa2"]
+[ext_resource type="Theme" uid="uid://3hbxgl1r5fqc" path="res://Resources/Themes/skills_menu_theme.tres" id="1_5jcsq"]
+[ext_resource type="Texture2D" uid="uid://db5p1r4b0y3ha" path="res://Assets/Characters/Player/c_front.png" id="1_nkp5l"]
+[ext_resource type="Texture2D" uid="uid://ckgirja4bd8xx" path="res://Assets/UI/Skills Menu/ink_circle.png" id="4_s6g7n"]
+
+[sub_resource type="Gradient" id="Gradient_skd61"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_luipm"]
+gradient = SubResource("Gradient_skd61")
+width = 3840
+height = 2160
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w2bw"]
+size = Vector2(1400, 1400)
+
+[node name="SkillsMenu" type="Node2D" node_paths=PackedStringArray("main_camera", "head_camera", "hand_camera")]
+position = Vector2(955, 540)
+script = ExtResource("1_3poa2")
+cam_transition_time = 1.5
+main_camera = NodePath("MainCamera")
+head_camera = NodePath("Character/HeadCamera")
+hand_camera = NodePath("Character/HandCamera")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_5jcsq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+theme = ExtResource("1_5jcsq")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Title"
+text = "Level Up"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"Title"
+text = "X"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 1.5
+text = "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT. CRAS TEMPOR VELIT AC ARCU CONGUE"
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 1.5
+theme = ExtResource("1_5jcsq")
+theme_type_variation = &"H_Line"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "⭐"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT REMNANTS    "
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "10000"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell2" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LEVEL COST"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer2/Cell2/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "10000"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="Cell" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell2" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell2/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell3" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell3"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell3/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell3/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell4" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell4"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell4/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell4/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell4/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell4/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell5" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell5"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell5/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell5/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell5/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell5/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell6" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell6"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell6/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell6/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell6/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell6/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell7" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell7"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell7/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell7/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell7/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell7/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell8" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell8"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell8/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell8/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell8/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell8/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell9" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell9"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell9/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell9/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell9/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell9/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell10" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell10"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell10/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell10/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell10/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell10/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell11" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell11"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell11/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell11/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell11/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell11/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="Cell12" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Cell"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell12"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell12/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell12/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_type_variation = &"Small_Label"
+text = "LIGHT LEVEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell12/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 50
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/VBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Cell12/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"Small_Label"
+text = "1"
+
+[node name="BG" type="Sprite2D" parent="."]
+texture_filter = 4
+texture_repeat = 1
+texture = SubResource("GradientTexture2D_luipm")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+scale = Vector2(7, 7)
+color = Color(0, 0, 0.196078, 1)
+
+[node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="Character" type="Node2D" parent="."]
+position = Vector2(-476, 2)
+
+[node name="Sprite" type="Sprite2D" parent="Character"]
+texture_filter = 4
+texture_repeat = 1
+scale = Vector2(6, 6)
+texture = ExtResource("1_nkp5l")
+
+[node name="HeadCamera" type="Camera2D" parent="Character"]
+position = Vector2(324, -296)
+enabled = false
+zoom = Vector2(1.5, 1.5)
+
+[node name="HandCamera" type="Camera2D" parent="Character"]
+position = Vector2(421, 112)
+enabled = false
+zoom = Vector2(2, 2)
+
+[node name="HeadRing" type="Sprite2D" parent="Character" groups=["ring"]]
+texture_filter = 4
+texture_repeat = 1
+position = Vector2(8, -296)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_s6g7n")
+
+[node name="ClickArea" type="Area2D" parent="Character/HeadRing"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/HeadRing/ClickArea"]
+visible = false
+shape = SubResource("RectangleShape2D_8w2bw")
+
+[node name="HandRing" type="Sprite2D" parent="Character" groups=["ring"]]
+texture_filter = 4
+texture_repeat = 1
+position = Vector2(213, 112)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_s6g7n")
+
+[node name="ClickArea" type="Area2D" parent="Character/HandRing"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/HandRing/ClickArea"]
+visible = false
+shape = SubResource("RectangleShape2D_8w2bw")
+
+[connection signal="input_event" from="Character/HeadRing/ClickArea" to="." method="_on_click_area_input_event" binds= ["head"]]
+[connection signal="input_event" from="Character/HandRing/ClickArea" to="." method="_on_click_area_input_event" binds= ["hand"]]

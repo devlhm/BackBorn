@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://3hbxgl1r5fqc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3r1r"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.588235, 0.6, 0.627451, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8s8my"]
+color = Color(0.588235, 0.6, 0.627451, 1)
+thickness = 5
+
+[resource]
+Cell/base_type = &"PanelContainer"
+Cell/styles/panel = SubResource("StyleBoxFlat_l3r1r")
+H_Line/base_type = &"Panel"
+H_Line/styles/panel = SubResource("StyleBoxLine_8s8my")
+Label/colors/font_color = Color(1, 1, 1, 0.882353)
+Label/font_sizes/font_size = 36
+Small_Label/base_type = &"Label"
+Small_Label/font_sizes/font_size = 24
+Title/base_type = &"Label"
+Title/font_sizes/font_size = 120
