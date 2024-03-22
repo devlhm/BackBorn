@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CombatSkill" load_steps=2 format=3 uid="uid://blwj6856bs7sy"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Skills/combat_skill_resource.gd" id="1_e3q5p"]
+
+[resource]
+script = ExtResource("1_e3q5p")
+name = "dash"
+cooldown = 1.0
+extra = {}

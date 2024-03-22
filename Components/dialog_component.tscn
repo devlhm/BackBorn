@@ -27,7 +27,7 @@ _data = {
 
 [node name="DialogComponent" type="CanvasLayer" node_paths=PackedStringArray("text_container", "button_container", "right_char_texture", "next_indicator")]
 script = ExtResource("1_3u4tc")
-dialogs_dir = "res://Dialogues"
+dialogs_dir = "res://Data/Dialogues"
 dialog_sprites_dir = "res://Assets/DialogSprites"
 text_container = NodePath("CenterContainer/MarginContainer/MarginContainer/TextContainer")
 button_container = NodePath("CenterContainer/MarginContainer/MarginContainer/MarginContainer/ButtonContainer")

@@ -9,3 +9,5 @@ class_name SavedGame
 	"taste": 1,
 	"faith": 1
 }
+
+@export var equipped_skill := "dash"

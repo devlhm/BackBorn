@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dy3ltwjcfjppl"]
+[gd_scene load_steps=41 format=3 uid="uid://dy3ltwjcfjppl"]
 
 [ext_resource type="Script" path="res://Scripts/overworld_controller.gd" id="1_b4mba"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="4_74wgl"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="17_5by6r"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="17_3185g"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="17_swu1m"]
+[ext_resource type="Texture2D" uid="uid://ca5oa03eltseo" path="res://Assets/Characters/character_test.png" id="19_qckg6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vfts0"]
 sky_horizon_color = Color(0.64625, 0.655657, 0.670833, 1)
@@ -60,7 +61,7 @@ size = Vector2(300, 300)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfxui"]
 points = PackedVector3Array(-150, 0, -150, -150, 0, 150, 150, 0, -150, 150, 0, 150)
 
-[sub_resource type="Resource" id="Resource_2c22e"]
+[sub_resource type="Resource" id="Resource_62u43"]
 script = ExtResource("12_wss8h")
 amount = 5000
 enabled = true
@@ -69,7 +70,7 @@ custom_seed = 200
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_c2q0i"]
+[sub_resource type="Resource" id="Resource_k81pv"]
 script = ExtResource("13_fba1u")
 position = Vector3(0.8, 0, 0.8)
 rotation = Vector3(0, 0, 0)
@@ -80,7 +81,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_w4ldq"]
+[sub_resource type="Resource" id="Resource_oiwyl"]
 script = ExtResource("14_put4h")
 iterations = 5
 offset_step = 1.0
@@ -92,15 +93,15 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_v5qs8"]
+[sub_resource type="Resource" id="Resource_o2wbm"]
 script = ExtResource("11_6n0sy")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_2c22e"), SubResource("Resource_c2q0i"), SubResource("Resource_w4ldq")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_62u43"), SubResource("Resource_k81pv"), SubResource("Resource_oiwyl")])
 
 [sub_resource type="Resource" id="Resource_ftaap"]
 script = ExtResource("17_swu1m")
 size = Vector3(295, 1, 295)
 
-[sub_resource type="Resource" id="Resource_o06ie"]
+[sub_resource type="Resource" id="Resource_kxph7"]
 script = ExtResource("12_wss8h")
 amount = 2000
 enabled = true
@@ -109,7 +110,7 @@ custom_seed = 200
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_fxkrf"]
+[sub_resource type="Resource" id="Resource_dqwno"]
 script = ExtResource("13_fba1u")
 position = Vector3(0.8, 0, 0.8)
 rotation = Vector3(0, 0, 0)
@@ -120,7 +121,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_o7sd4"]
+[sub_resource type="Resource" id="Resource_al5mt"]
 script = ExtResource("14_put4h")
 iterations = 5
 offset_step = 1.0
@@ -132,7 +133,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_540yu"]
+[sub_resource type="Resource" id="Resource_5jyn1"]
 script = ExtResource("17_5by6r")
 operation = 1
 scale = Vector3(0.5, 0.5, 0.5)
@@ -142,9 +143,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_uet5k"]
+[sub_resource type="Resource" id="Resource_8rrfn"]
 script = ExtResource("11_6n0sy")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_o06ie"), SubResource("Resource_fxkrf"), SubResource("Resource_o7sd4"), SubResource("Resource_540yu")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_kxph7"), SubResource("Resource_dqwno"), SubResource("Resource_al5mt"), SubResource("Resource_5jyn1")])
 
 [sub_resource type="Resource" id="Resource_ckvrp"]
 script = ExtResource("17_swu1m")
@@ -156,6 +157,18 @@ albedo_color = Color(0.662745, 0.313726, 0.0745098, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_x8aws"]
 material = SubResource("StandardMaterial3D_jjeel")
 size = Vector2(300, 600)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsb2i"]
+transparency = 2
+alpha_scissor_threshold = 0.626
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("19_qckg6")
+
+[sub_resource type="QuadMesh" id="QuadMesh_84xq6"]
+material = SubResource("StandardMaterial3D_dsb2i")
+size = Vector2(1.5, 1.7)
 
 [node name="Overworld" type="Node3D" node_paths=PackedStringArray("player") groups=["overworld_controller"]]
 script = ExtResource("1_b4mba")
@@ -180,7 +193,7 @@ monitorable = false
 
 [node name="DialogComponent" parent="Interactable" groups=["dialog_component"] instance=ExtResource("7_jtt2p")]
 visible = false
-first_dialog_path = "res://Dialogues/test.json"
+first_dialog_path = "res://Data/Dialogues/test.json"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 4, 5.5)
@@ -213,7 +226,7 @@ shape = SubResource("ConvexPolygonShape3D_mfxui")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 script = ExtResource("10_pg2h4")
 enable_updates_in_game = true
-modifier_stack = SubResource("Resource_v5qs8")
+modifier_stack = SubResource("Resource_o2wbm")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -251,13 +264,13 @@ shape = SubResource("Resource_ftaap")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195, 0)
 script = ExtResource("10_pg2h4")
 enable_updates_in_game = true
-modifier_stack = SubResource("Resource_uet5k")
+modifier_stack = SubResource("Resource_8rrfn")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
 [node name="ScatterItem2" type="Node3D" parent="Scenery/Ground/GroundG/Flowers"]
 script = ExtResource("16_x0ckv")
-proportion = 30
+proportion = 33
 override_cast_shadow = 0
 visibility_range_end = 100.0
 visibility_range_fade_mode = 1
@@ -265,7 +278,7 @@ path = "res://Scenes/Props/Flowers/flower_0.tscn"
 
 [node name="ScatterItem" type="Node3D" parent="Scenery/Ground/GroundG/Flowers"]
 script = ExtResource("16_x0ckv")
-proportion = 30
+proportion = 33
 override_cast_shadow = 0
 visibility_range_end = 100.0
 visibility_range_fade_mode = 1
@@ -273,7 +286,7 @@ path = "res://Scenes/Props/Flowers/flower_1.tscn"
 
 [node name="ScatterItem3" type="Node3D" parent="Scenery/Ground/GroundG/Flowers"]
 script = ExtResource("16_x0ckv")
-proportion = 30
+proportion = 33
 override_cast_shadow = 0
 visibility_range_end = 100.0
 visibility_range_fade_mode = 1
@@ -326,3 +339,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0.
 
 [node name="dead_tree_13" parent="Scenery/Trees" instance=ExtResource("9_bbbbi")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0.01, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.8, 0)
+mesh = SubResource("QuadMesh_84xq6")

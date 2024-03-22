@@ -133,5 +133,4 @@ double_sided = false
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_xy2jm")
-animation = &"walk_down"
-frame_progress = 0.344158
+animation = &"walk_left"
