@@ -1,5 +1,7 @@
 extends Node
 
+const SKILL_DATA_LOCATION = "res://Resources/Custom/CombatSkills/"
+const ITEM_DATA_LOCATION = "res://Resources/Custom/Items/"
 var stats = {
 	"sight": 1,
 	"smell": 1,
@@ -9,7 +11,9 @@ var stats = {
 	"faith": 1
 }
 
-var equipped_skills = ["dash", ""]
+var inventory: Array[Item] = [ResourceLoader.load(ITEM_DATA_LOCATION + "date.tres")]
+
+var equipped_skills: Array[CombatSkill] = [ResourceLoader.load(SKILL_DATA_LOCATION + "dash.tres"), null]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,0 +1,55 @@
+{
+	"S1": {
+		"type": "speech",
+		"text": [
+			"Hello!",
+			"Lorem ipsum dolor sit amet!"
+		],
+		"to": "C1",
+		"sprite": "test/test",
+		"name": "Test"
+	},
+	"C1": {
+		"type": "choice",
+		"options": [
+			{
+				"text": "Cool!",
+				"to": "S2"
+			},
+			{
+				"text": "That's noice!",
+				"to": "S2"
+			},
+			{
+				"text": "Didn't ask",
+				"to": "S3"
+			},
+			{
+				"text": "Fuck you",
+				"to": "S3"
+			}
+		],
+		"sprite": "none"
+	},
+	"S2": {
+		"type": "speech",
+		"text": [
+			"Thanks for choosing me!"
+		],
+		"to": "end",
+		"sprite": "test/test",
+		"name": "Test"
+	},
+	"S3": {
+		"type": "speech",
+		"text": [
+			"I hate you!"
+		],
+		"to": "end",
+		"sprite": "test/test",
+		"name": "Test"
+	},
+	"end": {
+		"next": "test2"
+	}
+}

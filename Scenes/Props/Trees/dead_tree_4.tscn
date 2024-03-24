@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://oeuhj70socd4"]
 
-[ext_resource type="Texture2D" uid="uid://bsh1hlxv53qgw" path="res://Assets/PropSprites/dead_tree/dead_tree_4_bottom.png" id="1_n85dt"]
-[ext_resource type="Texture2D" uid="uid://dsqlirktepogp" path="res://Assets/PropSprites/dead_tree/dead_tree_4.png" id="2_qlmkr"]
+[ext_resource type="Texture2D" uid="uid://bsh1hlxv53qgw" path="res://Assets/PropSprites/trees/dead_tree/old/dead_tree_4_bottom.png" id="1_n85dt"]
+[ext_resource type="Texture2D" uid="uid://dsqlirktepogp" path="res://Assets/PropSprites/trees/dead_tree/old/dead_tree_4.png" id="2_qlmkr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxr8q"]
 transparency = 2

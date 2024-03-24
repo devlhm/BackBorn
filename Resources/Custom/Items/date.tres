@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDate" load_steps=3 format=3 uid="uid://dlkks0u5tt0uu"]
+
+[ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="1_d4q12"]
+[ext_resource type="Script" path="res://Scripts/Resources/Items/date.gd" id="1_nvx1v"]
+
+[resource]
+script = ExtResource("1_nvx1v")
+target = 0
+target_amount = 1
+target_amount_exact = true
+name = "Date"
+display_name = "date"
+description = "Restores 20 PV"
+icon = ExtResource("1_d4q12")

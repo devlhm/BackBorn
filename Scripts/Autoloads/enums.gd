@@ -1,0 +1,3 @@
+extends Node
+
+enum COMBAT_TARGET {PLAYER, ENEMY, ALL_ENEMIES}

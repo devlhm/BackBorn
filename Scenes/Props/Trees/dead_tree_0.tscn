@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://crxtho8w3h3qk"]
+
+[ext_resource type="Texture2D" uid="uid://dm728i6abu8yp" path="res://Assets/PropSprites/trees/bottoms/tree_bottom_4.png" id="1_ed8ar"]
+[ext_resource type="Texture2D" uid="uid://hb2ay20pprdo" path="res://Assets/PropSprites/trees/dead_tree/tree_dead_4.png" id="2_y338r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxr8q"]
+transparency = 2
+alpha_scissor_threshold = 0.1
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_ed8ar")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qv7rn"]
+material = SubResource("StandardMaterial3D_qxr8q")
+size = Vector2(3, 3)
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_khi0y"]
+transparency = 2
+alpha_scissor_threshold = 0.1
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("2_y338r")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_y1tjv"]
+material = SubResource("StandardMaterial3D_khi0y")
+size = Vector2(3, 3)
+orientation = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53f4u"]
+size = Vector3(0.4, 0.5, 1)
+
+[node name="dead_tree_4" type="Node3D"]
+
+[node name="dead_tree_4_bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.14624, -0.14853, -0.00410408)
+sorting_offset = 10.0
+mesh = SubResource("QuadMesh_qv7rn")
+skeleton = NodePath("")
+
+[node name="dead_tree_4_top" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.004, 0)
+mesh = SubResource("QuadMesh_y1tjv")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="dead_tree_4_top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.004, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dead_tree_4_top/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.25, 1.49012e-08)
+shape = SubResource("BoxShape3D_53f4u")

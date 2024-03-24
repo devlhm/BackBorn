@@ -2,7 +2,8 @@ extends CharacterBody2D
 class_name CombatPlayer
 
 const SPEED = 1000
-
+var max_health = 100
+var health = max_health
 var dash_factor: float = 1
 @onready var dash_timer : Timer = $DashTimer
 var direction := Vector2.ZERO

@@ -3,11 +3,12 @@ class_name CombatManager
 
 @export var turn_cooldown: Timer
 @export var combat_ui: CombatUI
+@export var player: CombatPlayer
 
 var can_start_turn := false
 
 func _ready():
-	pass
+	combat_ui.player = player
 	
 func _process(delta):
 	pass
@@ -23,3 +24,4 @@ func start_turn():
 
 func _on_turn_cooldown_timeout():
 	can_start_turn = true
+
