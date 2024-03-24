@@ -9,6 +9,7 @@ var can_start_turn := false
 
 func _ready():
 	combat_ui.player = player
+	combat_ui.turn_ended.connect(on_turn_end)
 	
 func _process(delta):
 	pass
@@ -25,3 +26,5 @@ func start_turn():
 func _on_turn_cooldown_timeout():
 	can_start_turn = true
 
+func on_turn_end():
+	turn_cooldown.start()

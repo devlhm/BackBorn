@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5jby3b0oi4jg"]
+
+[ext_resource type="Theme" uid="uid://dclupkp41mch1" path="res://Resources/Themes/combat_ui.tres" id="1_q87ri"]
+
+[node name="Label" type="Label"]
+size_flags_horizontal = 3
+theme = ExtResource("1_q87ri")
+theme_type_variation = &"MediumHeader"
+text = "TESTE"

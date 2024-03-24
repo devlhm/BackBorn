@@ -8,7 +8,7 @@ script = ExtResource("1_nvx1v")
 target = 0
 target_amount = 1
 target_amount_exact = true
-name = "Date"
-display_name = "date"
-description = "Restores 20 PV"
+name = "date"
+display_name = "Date"
+description = "Restores 20 [color=\"blue\"]PV[/color]"
 icon = ExtResource("1_d4q12")
