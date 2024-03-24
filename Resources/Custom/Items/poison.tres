@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemPoison" load_steps=3 format=3 uid="uid://c11g3qiaqy2uy"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Items/poison.gd" id="1_2lir6"]
+[ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="1_5uguh"]
+
+[resource]
+script = ExtResource("1_2lir6")
+target = 1
+target_amount = 2
+target_amount_exact = true
+name = "poison"
+display_name = "Poison"
+description = "Deals 20 DMG"
+icon = ExtResource("1_5uguh")

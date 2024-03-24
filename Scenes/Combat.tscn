@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cndc48c2sqais"]
+[gd_scene load_steps=23 format=3 uid="uid://cndc48c2sqais"]
 
 [ext_resource type="Script" path="res://Scripts/player_combat.gd" id="1_q5u5q"]
 [ext_resource type="Script" path="res://Scripts/combat_manager.gd" id="1_v6fvh"]
 [ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="2_hy0sj"]
 [ext_resource type="Script" path="res://Scripts/combat_skill_manager.gd" id="3_4egos"]
 [ext_resource type="PackedScene" uid="uid://dr33blco6e6f3" path="res://Scenes/UI/combat_submenu_btn.tscn" id="3_b1d62"]
+[ext_resource type="PackedScene" uid="uid://b5jby3b0oi4jg" path="res://Scenes/UI/combat_enemy_name.tscn" id="4_5pjec"]
 [ext_resource type="Shader" path="res://Resources/Shaders/Progress.gdshader" id="5_02ceh"]
 [ext_resource type="Texture2D" uid="uid://xk8ji70ohc0a" path="res://Assets/Icons/inverted-triangle.png" id="5_dxvl1"]
 [ext_resource type="Script" path="res://Scripts/combat_ui.gd" id="5_fnolf"]
@@ -82,6 +83,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1920, 62)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 390)]
+}
 
 [sub_resource type="Animation" id="Animation_0vcaf"]
 resource_name = "hide_2"
@@ -132,6 +145,57 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_bie4m"]
+resource_name = "hide_3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 690), Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 640), Vector2(0, 1018)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_vm1b2"]
@@ -236,57 +300,6 @@ tracks/3/keys = {
 "values": [true, true]
 }
 
-[sub_resource type="Animation" id="Animation_bie4m"]
-resource_name = "hide_3"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 690), Vector2(0, 1080)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../MarginContainer:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 640), Vector2(0, 1018)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [false, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21g8a"]
 _data = {
 "RESET": SubResource("Animation_p6jwj"),
@@ -348,6 +361,7 @@ turn_cooldown = NodePath("../TurnCooldown")
 turn_indicator = NodePath("MarginContainer/TurnIndicator")
 combat_submenu_btn_scn = ExtResource("3_b1d62")
 btn_container = NodePath("MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonContainer")
+enemy_name_btn_scene = ExtResource("4_5pjec")
 turn_menu_anim = NodePath("MarginContainer2/AnimationPlayer")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CombatUI"]
@@ -465,7 +479,7 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="Enemy" type="AnimatableBody2D" parent="Pausable"]
+[node name="Enemy" type="AnimatableBody2D" parent="Pausable" groups=["enemy"]]
 position = Vector2(942, 248)
 
 [node name="Sprite" type="Sprite2D" parent="Pausable/Enemy"]
@@ -473,6 +487,16 @@ modulate = Color(0.298039, 0.764706, 0.341176, 1)
 texture = ExtResource("2_hy0sj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pausable/Enemy"]
+shape = SubResource("RectangleShape2D_vme1w")
+
+[node name="Enemy2" type="AnimatableBody2D" parent="Pausable" groups=["enemy"]]
+position = Vector2(1190, 248)
+
+[node name="Sprite" type="Sprite2D" parent="Pausable/Enemy2"]
+modulate = Color(0.298039, 0.764706, 0.341176, 1)
+texture = ExtResource("2_hy0sj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pausable/Enemy2"]
 shape = SubResource("RectangleShape2D_vme1w")
 
 [connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Item" to="CombatUI" method="_on_submenu_button_up" binds= ["item"]]

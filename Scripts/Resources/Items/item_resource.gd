@@ -10,7 +10,10 @@ class_name Item
 @export var icon: Texture2D
 
 func use(target):
-	pass
+	assert(false, "Item " + name + " use function not implemented")
 
 func is_usable(player: CombatPlayer, enemies: Array[Node]) -> bool:
+	if(target_amount_exact && target == Enums.COMBAT_TARGET.ENEMY && enemies.size() < target_amount):
+		return false
+	
 	return true

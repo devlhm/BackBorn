@@ -2,11 +2,13 @@ extends CanvasLayer
 class_name CombatUI
 
 signal turn_ended
+signal targets_selected
 
 @export var turn_cooldown: Timer
 @export var turn_indicator: TextureRect
 @export var combat_submenu_btn_scn: PackedScene
 @export var btn_container: GridContainer
+@export var enemy_name_btn_scene: PackedScene
 
 var player: CombatPlayer
 
@@ -29,15 +31,10 @@ func on_turn_end():
 	else:
 		submenu_selected = false
 		turn_menu_anim.play("hide_3")
-		turn_menu_anim.animation_finished.connect(func(anim):
-			for child in btn_container.get_children():
-				btn_container.remove_child(child)
-				child.queue_free()
-		, CONNECT_ONE_SHOT)
+		turn_menu_anim.animation_finished.connect(func(anim): clean_btn_container(), CONNECT_ONE_SHOT)
 		
 
 func _on_submenu_button_up(button_name: String):
-	print("button_name")
 	submenu_selected = true
 
 	match(button_name):
@@ -46,21 +43,6 @@ func _on_submenu_button_up(button_name: String):
 
 	turn_menu_anim.play("show_2")
 
-func on_submenu_exit():
-	turn_menu_anim.play("hide_2")
-	turn_menu_anim.animation_finished.connect(func(anim):
-			for child in btn_container.get_children():
-				btn_container.remove_child(child)
-				child.queue_free()
-			, CONNECT_ONE_SHOT)
-	submenu_selected = false
-
-func on_combat_submenu():
-	pass
-	
-func on_empathy_submenu():
-	pass
-	
 func render_btn(title: String, desc: String, icon: Texture2D, enabled: bool, click_callback: Callable):
 		
 		var btn: Button = combat_submenu_btn_scn.instantiate()
@@ -71,9 +53,33 @@ func render_btn(title: String, desc: String, icon: Texture2D, enabled: bool, cli
 		btn.disabled = !enabled
 		btn_container.add_child(btn)
 
-func target_selector():
-	#TODO
-	return get_tree().get_nodes_in_group("enemy") #PLACEHOLDER
+func clean_btn_container():
+	for child in btn_container.get_children():
+		btn_container.remove_child(child)
+		child.queue_free()
+
+func on_submenu_exit():
+	turn_menu_anim.play("hide_2")
+	turn_menu_anim.animation_finished.connect(func(anim): clean_btn_container(), CONNECT_ONE_SHOT)
+	submenu_selected = false
+
+func on_combat_submenu():
+	pass
+	
+func on_empathy_submenu():
+	pass
+
+func on_item_submenu():
+	for item in PlayerStats.inventory:
+		item = item as Item
+		var item_usable := item.is_usable(get_tree().get_first_node_in_group("player"), get_tree().get_nodes_in_group("enemy"))
+		render_btn(item.display_name, item.description, item.icon, item_usable, func(): 
+			var item_target = await select_target(item.target, item.target_amount)
+			item.use(item_target)
+			on_turn_end()
+			turn_ended.emit()
+		)
+	
 
 func select_target(target_type: Enums.COMBAT_TARGET, target_amt: int):
 	match target_type:
@@ -83,21 +89,53 @@ func select_target(target_type: Enums.COMBAT_TARGET, target_amt: int):
 			return get_tree().get_nodes_in_group("enemy")
 		Enums.COMBAT_TARGET.ENEMY:
 			var enemies := get_tree().get_nodes_in_group("enemy")
+			
 			if(enemies.size() <= target_amt):
 				return enemies
-			return target_selector()
+
+			var enemies_selected = []
+			target_selector(enemies_selected, target_amt)
+			await targets_selected
+			return enemies_selected
+
+func target_selector(enemies_selected, target_amt: int):
+	clean_btn_container()
 	
-func on_item_submenu():
-	for item in PlayerStats.inventory:
-		item = item as Item
-		var item_target = select_target(item.target, item.target_amount)
-		var item_usable := item.is_usable(get_tree().get_first_node_in_group("player"), get_tree().get_nodes_in_group("enemy"))
-		render_btn(item.display_name, item.description, item.icon, item_usable, func(): 
-			item.use(item_target)
-			on_turn_end()
-			turn_ended.emit()
-		)	
-
-
-func _on_label_mouse_entered():
-	pass # Replace with function body.
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for i in enemies.size():
+		var enemy: Node = enemies[i]
+		
+		var enemy_name_btn: RichTextLabel = enemy_name_btn_scene.instantiate()
+		enemy_name_btn.text = enemy.name
+		btn_container.add_child(enemy_name_btn)
+		
+		var on_mouse_entered = func():
+			enemy.modulate = Color.YELLOW
+			enemy_name_btn.add_theme_color_override("default_color", Color.YELLOW)
+		
+		enemy_name_btn.mouse_entered.connect(on_mouse_entered)
+		
+		var on_mouse_exited = func():
+			enemy.modulate = Color.WHITE
+			enemy_name_btn.add_theme_color_override("default_color", Color.WHITE)
+			
+		enemy_name_btn.mouse_exited.connect(on_mouse_exited)
+		
+		enemy_name_btn.gui_input.connect(func(event: InputEvent):
+			if event is InputEventMouseButton:
+				event = event as InputEventMouseButton
+				
+				if event.pressed && event.button_index == MOUSE_BUTTON_LEFT && enemies_selected.find(enemy) == -1:
+					enemies_selected.push_back(enemy)
+					
+					enemy_name_btn.mouse_exited.disconnect(on_mouse_exited)
+					enemy_name_btn.mouse_entered.disconnect(on_mouse_entered)
+					
+					if(enemies_selected.size() == target_amt):
+						targets_selected.emit(enemies_selected)
+						on_targets_selected(enemies_selected)
+		)
+		
+func on_targets_selected(targets):
+	for target in targets:
+		target.modulate = Color.WHITE

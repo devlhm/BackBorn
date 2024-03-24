@@ -27,4 +27,5 @@ func _on_turn_cooldown_timeout():
 	can_start_turn = true
 
 func on_turn_end():
+	get_tree().paused = false
 	turn_cooldown.start()
