@@ -421,9 +421,6 @@ theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 40
 columns = 2
 
-[node name="Button" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonContainer" instance=ExtResource("3_b1d62")]
-layout_mode = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CombatUI/MarginContainer2"]
 root_node = NodePath("../PanelContainer")
 libraries = {

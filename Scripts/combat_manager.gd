@@ -8,6 +8,12 @@ class_name CombatManager
 var can_start_turn := false
 
 func _ready():
+	for quickItem in PlayerStats.equipped_quick_items:
+		quickItem = quickItem as QuickItem
+		
+		if quickItem.has_method("on_combat_start"):
+			quickItem.on_combat_start(player)
+		
 	combat_ui.player = player
 	combat_ui.turn_ended.connect(on_turn_end)
 	

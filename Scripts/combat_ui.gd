@@ -58,11 +58,6 @@ func clean_btn_container():
 		btn_container.remove_child(child)
 		child.queue_free()
 
-func on_submenu_exit():
-	turn_menu_anim.play("hide_2")
-	turn_menu_anim.animation_finished.connect(func(anim): clean_btn_container(), CONNECT_ONE_SHOT)
-	submenu_selected = false
-
 func on_combat_submenu():
 	pass
 	
@@ -70,16 +65,22 @@ func on_empathy_submenu():
 	pass
 
 func on_item_submenu():
-	for item in PlayerStats.inventory:
-		item = item as Item
-		var item_usable := item.is_usable(get_tree().get_first_node_in_group("player"), get_tree().get_nodes_in_group("enemy"))
+	for i in PlayerStats.inventory.size():
+		var entry = PlayerStats.inventory[i]
+		var item: Item = entry.item
+		var item_usable : bool = item.is_usable(get_tree().get_first_node_in_group("player"), get_tree().get_nodes_in_group("enemy"))
 		render_btn(item.display_name, item.description, item.icon, item_usable, func(): 
 			var item_target = await select_target(item.target, item.target_amount)
 			item.use(item_target)
 			on_turn_end()
+			PlayerStats.on_item_use(i)
 			turn_ended.emit()
 		)
 	
+func on_submenu_exit():
+	turn_menu_anim.play("hide_2")
+	turn_menu_anim.animation_finished.connect(func(anim): clean_btn_container(), CONNECT_ONE_SHOT)
+	submenu_selected = false
 
 func select_target(target_type: Enums.COMBAT_TARGET, target_amt: int):
 	match target_type:

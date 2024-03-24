@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QuickItemSword" load_steps=4 format=3 uid="uid://cu84i7khuxfud"]
+
+[ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="1_1bcs4"]
+[ext_resource type="Script" path="res://Scripts/Resources/QuickItems/sword.gd" id="1_gpbdi"]
+[ext_resource type="PackedScene" uid="uid://bpxdmfqwgqmyc" path="res://Scenes/QuickItems/Sword.tscn" id="3_815it"]
+
+[resource]
+script = ExtResource("1_gpbdi")
+swordScene = ExtResource("3_815it")
+name = "sword"
+display_name = "Sword"
+description = "Deals 10 DMG"
+icon = ExtResource("1_1bcs4")
+cooldown = 5

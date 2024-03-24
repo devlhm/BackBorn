@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_2lir6")
+max_uses = 1
 target = 1
-target_amount = 2
+target_amount = 1
 target_amount_exact = true
 name = "poison"
 display_name = "Poison"
