@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjj8qwf268wia"]
+
+[ext_resource type="Script" path="res://Scripts/combat_enemy.gd" id="1_53cdr"]
+[ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="2_s84lp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vme1w"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g410"]
+size = Vector2(158.331, 158.697)
+
+[node name="Enemy" type="AnimatableBody2D" node_paths=PackedStringArray("hurtbox") groups=["enemy"]]
+position = Vector2(942, 248)
+script = ExtResource("1_53cdr")
+hurtbox = NodePath("Hurtbox")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.298039, 0.764706, 0.341176, 1)
+texture = ExtResource("2_s84lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vme1w")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_2g410")

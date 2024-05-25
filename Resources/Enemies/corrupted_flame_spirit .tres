@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=2 format=3 uid="uid://b5qv72pd0pe8g"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/enemy_data.gd" id="1_brqko"]
+
+[resource]
+script = ExtResource("1_brqko")
+lvl = 1
+lp = 50
+atk_formula = "50+(2-spiritual)*10"
+cdwn = 1.5
+reward_formula = "70+(spiritual-2)*10"
+ai_type = 0
+range = 0
+name = "Corrupted Flame Spirit"

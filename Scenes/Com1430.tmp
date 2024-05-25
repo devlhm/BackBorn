@@ -1,0 +1,508 @@
+[gd_scene load_steps=23 format=3 uid="uid://cndc48c2sqais"]
+
+[ext_resource type="Script" path="res://Scripts/player_combat.gd" id="1_q5u5q"]
+[ext_resource type="Script" path="res://Scripts/combat_manager.gd" id="1_v6fvh"]
+[ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="2_hy0sj"]
+[ext_resource type="Script" path="res://Scripts/combat_skill_manager.gd" id="3_4egos"]
+[ext_resource type="PackedScene" uid="uid://dr33blco6e6f3" path="res://Scenes/UI/combat_submenu_btn.tscn" id="3_b1d62"]
+[ext_resource type="PackedScene" uid="uid://b5jby3b0oi4jg" path="res://Scenes/UI/combat_enemy_name.tscn" id="4_5pjec"]
+[ext_resource type="Shader" path="res://Resources/Shaders/Progress.gdshader" id="5_02ceh"]
+[ext_resource type="Texture2D" uid="uid://xk8ji70ohc0a" path="res://Assets/Icons/inverted-triangle.png" id="5_dxvl1"]
+[ext_resource type="Script" path="res://Scripts/combat_ui.gd" id="5_fnolf"]
+[ext_resource type="PackedScene" uid="uid://bjj8qwf268wia" path="res://Scenes/combat_enemy.tscn" id="10_wx31m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o6bia"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rjw0f"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ulg4u"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d6n31"]
+
+[sub_resource type="Animation" id="Animation_p6jwj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1018)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../MarginContainer:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 62)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 390)]
+}
+
+[sub_resource type="Animation" id="Animation_0vcaf"]
+resource_name = "hide_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 690), Vector2(0, 830)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 640), Vector2(0, 780)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_bie4m"]
+resource_name = "hide_3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 690), Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 640), Vector2(0, 1018)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_vm1b2"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 830)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1018), Vector2(0, 780)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_gbcc7"]
+resource_name = "show_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 830), Vector2(0, 690)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 780), Vector2(0, 640)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_21g8a"]
+_data = {
+"RESET": SubResource("Animation_p6jwj"),
+"hide_2": SubResource("Animation_0vcaf"),
+"hide_3": SubResource("Animation_bie4m"),
+"show": SubResource("Animation_vm1b2"),
+"show_2": SubResource("Animation_gbcc7")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a76a1"]
+shader = ExtResource("5_02ceh")
+shader_parameter/progress = 1.0
+shader_parameter/fill_direction = Vector2(1, 0)
+shader_parameter/unfilled_color = Color(0.333333, 0.333333, 0.333333, 1)
+shader_parameter/filled_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dttsu"]
+size = Vector2(130, 130)
+
+[node name="Combat" type="Node2D" node_paths=PackedStringArray("turn_cooldown", "combat_ui", "player")]
+process_mode = 3
+process_physics_priority = -1
+script = ExtResource("1_v6fvh")
+turn_cooldown = NodePath("TurnCooldown")
+combat_ui = NodePath("CombatUI")
+player = NodePath("Pausable/Player")
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="Left" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(0, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left"]
+shape = SubResource("WorldBoundaryShape2D_o6bia")
+
+[node name="Right" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1920, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right"]
+shape = SubResource("WorldBoundaryShape2D_rjw0f")
+
+[node name="Top" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(960, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Top"]
+shape = SubResource("WorldBoundaryShape2D_ulg4u")
+
+[node name="Bottom" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(960, 1083)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom"]
+shape = SubResource("WorldBoundaryShape2D_d6n31")
+
+[node name="CombatUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("turn_cooldown", "turn_indicator", "btn_container", "turn_menu_anim")]
+script = ExtResource("5_fnolf")
+turn_cooldown = NodePath("../TurnCooldown")
+turn_indicator = NodePath("MarginContainer/TurnIndicator")
+combat_submenu_btn_scn = ExtResource("3_b1d62")
+btn_container = NodePath("MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonContainer")
+enemy_name_btn_scene = ExtResource("4_5pjec")
+turn_menu_anim = NodePath("MarginContainer2/AnimationPlayer")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CombatUI"]
+custom_minimum_size = Vector2(1920, 0)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 390.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="CombatUI/MarginContainer2"]
+custom_minimum_size = Vector2(0, 390)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CombatUI/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 25
+
+[node name="SubmenuSelector" type="HBoxContainer" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="Combat" type="Button" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Combat
+"
+
+[node name="Empathy" type="Button" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Empathy"
+
+[node name="Item" type="Button" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ButtonContainer" type="GridContainer" parent="CombatUI/MarginContainer2/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 40
+columns = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CombatUI/MarginContainer2"]
+root_node = NodePath("../PanelContainer")
+libraries = {
+"": SubResource("AnimationLibrary_21g8a")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CombatUI"]
+custom_minimum_size = Vector2(1920, 62)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="TurnIndicator" type="TextureRect" parent="CombatUI/MarginContainer"]
+material = SubResource("ShaderMaterial_a76a1")
+layout_mode = 2
+texture = ExtResource("5_dxvl1")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="CombatUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="Healthbar" type="ProgressBar" parent="CombatUI/MarginContainer3"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+value = 100.0
+
+[node name="Pausable" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Player" type="CharacterBody2D" parent="Pausable" groups=["player"]]
+position = Vector2(945, 870)
+script = ExtResource("1_q5u5q")
+
+[node name="Sprite" type="Sprite2D" parent="Pausable/Player"]
+texture = ExtResource("2_hy0sj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pausable/Player"]
+shape = SubResource("RectangleShape2D_dttsu")
+
+[node name="SkillManager" type="Node2D" parent="Pausable/Player"]
+script = ExtResource("3_4egos")
+
+[node name="Skill1Cooldown" type="Timer" parent="Pausable/Player/SkillManager"]
+one_shot = true
+
+[node name="Skill2Cooldown" type="Timer" parent="Pausable/Player/SkillManager"]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Pausable/Player"]
+wait_time = 0.3
+one_shot = true
+
+[node name="Hand" type="Marker2D" parent="Pausable/Player"]
+position = Vector2(89, 39)
+
+[node name="Enemy" parent="Pausable" instance=ExtResource("10_wx31m")]
+position = Vector2(1173, 256)
+
+[node name="Enemy2" parent="Pausable" instance=ExtResource("10_wx31m")]
+position = Vector2(715, 261)
+
+[node name="QuickItemCooldown1" type="Timer" parent="."]
+one_shot = true
+
+[node name="QuickItemCooldown2" type="Timer" parent="."]
+one_shot = true
+
+[node name="TurnCooldown" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Combat" to="CombatUI" method="_on_submenu_button_up" binds= ["combat"]]
+[connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Item" to="CombatUI" method="_on_submenu_button_up" binds= ["item"]]
+[connection signal="timeout" from="QuickItemCooldown1" to="." method="_on_quick_item_cooldown" binds= [0]]
+[connection signal="timeout" from="QuickItemCooldown2" to="." method="_on_quick_item_cooldown" binds= [1]]
+[connection signal="timeout" from="TurnCooldown" to="." method="_on_turn_cooldown_timeout"]

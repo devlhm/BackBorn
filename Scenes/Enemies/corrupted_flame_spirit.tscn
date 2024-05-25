@@ -1,0 +1,266 @@
+[gd_scene load_steps=51 format=3 uid="uid://drddman7um5jy"]
+
+[ext_resource type="Script" path="res://Scripts/combat_enemy.gd" id="1_di14r"]
+[ext_resource type="Texture2D" uid="uid://dgb1dgc2g4axc" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front0.png" id="2_1nmgy"]
+[ext_resource type="Texture2D" uid="uid://d0p35wvrmpoqs" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back0.png" id="2_xggaf"]
+[ext_resource type="Texture2D" uid="uid://cbteiodxi8cv5" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front1.png" id="3_fwayq"]
+[ext_resource type="Texture2D" uid="uid://csymvqaqvxaxe" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back1.png" id="3_i8iry"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="3_twclh"]
+[ext_resource type="Texture2D" uid="uid://b8uocm1ksnce0" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back2.png" id="4_alby6"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_attack.gd" id="4_b346c"]
+[ext_resource type="Texture2D" uid="uid://bt1yleygcdpfd" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front2.png" id="4_fgypr"]
+[ext_resource type="Texture2D" uid="uid://cc6nsvdhxnmm7" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front3.png" id="5_o162f"]
+[ext_resource type="Texture2D" uid="uid://c2ohmdayjanvc" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back3.png" id="5_qaixx"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_follow.gd" id="5_wi1dg"]
+[ext_resource type="Texture2D" uid="uid://bsa3a8fsaui21" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front4.png" id="6_lrsol"]
+[ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="6_w7rp4"]
+[ext_resource type="Texture2D" uid="uid://ijif6xrbfvnn" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back4.png" id="6_xx04e"]
+[ext_resource type="Texture2D" uid="uid://mp7rmlb0tp16" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front5.png" id="7_glmv2"]
+[ext_resource type="Texture2D" uid="uid://dg8qeargqnfwh" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back5.png" id="7_gm53p"]
+[ext_resource type="Script" path="res://Scripts/Components/move_component.gd" id="7_gsmju"]
+[ext_resource type="Texture2D" uid="uid://bj8vfhbfkgngx" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back6.png" id="8_jntgx"]
+[ext_resource type="Texture2D" uid="uid://di1bxqjqwxpau" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front6.png" id="8_w3mkd"]
+[ext_resource type="Texture2D" uid="uid://bsugsq81jy7g8" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back7.png" id="9_bledt"]
+[ext_resource type="Texture2D" uid="uid://bmhqg1jjnfkc5" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front7.png" id="9_k7o1o"]
+[ext_resource type="Texture2D" uid="uid://c2hcl8ald5ei2" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side0.png" id="10_yjc5b"]
+[ext_resource type="Texture2D" uid="uid://b2ijnl5h5gq24" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side1.png" id="11_l7lxy"]
+[ext_resource type="Texture2D" uid="uid://ciqipntsbxkp3" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side2.png" id="12_8v8vi"]
+[ext_resource type="Texture2D" uid="uid://cy868pmhjbc4c" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side3.png" id="13_sxklf"]
+[ext_resource type="Texture2D" uid="uid://b8vupw8qw1tyl" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side4.png" id="14_aempg"]
+[ext_resource type="Texture2D" uid="uid://bg8fue2db0xad" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side5.png" id="15_dip0v"]
+[ext_resource type="Texture2D" uid="uid://bg32xgrto43bc" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side6.png" id="16_hnwgo"]
+[ext_resource type="Texture2D" uid="uid://b1l4dy11llf4j" path="res://Assets/Enemies/corrupted_flame_spirit/side/cfs_side7.png" id="17_q1cx6"]
+[ext_resource type="Texture2D" uid="uid://bgw7f62hf44hj" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back0.png" id="26_bwdeq"]
+[ext_resource type="Texture2D" uid="uid://c4m0vytndktc8" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front0.png" id="26_wympl"]
+[ext_resource type="Texture2D" uid="uid://dhleo40bunkbh" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front1.png" id="27_h6h5v"]
+[ext_resource type="Texture2D" uid="uid://y7stpvwhxboe" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back1.png" id="27_uhe5y"]
+[ext_resource type="Texture2D" uid="uid://bqpplpefa5yo1" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front2.png" id="28_vda00"]
+[ext_resource type="Texture2D" uid="uid://447ccu5aokvj" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back2.png" id="28_yuv6y"]
+[ext_resource type="Texture2D" uid="uid://cvj1fymvnhnvl" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front3.png" id="29_3drj7"]
+[ext_resource type="Texture2D" uid="uid://wdyul541cprs" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back3.png" id="29_amjmb"]
+[ext_resource type="Texture2D" uid="uid://p6m7dlnx6m06" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front4.png" id="30_britt"]
+[ext_resource type="Texture2D" uid="uid://cc0fxaby1dcgk" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back4.png" id="30_ttxdw"]
+[ext_resource type="Texture2D" uid="uid://snh0ljnx7kqi" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back5.png" id="31_ej44a"]
+[ext_resource type="Texture2D" uid="uid://budx1b26lgpe" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front5.png" id="31_r4agc"]
+[ext_resource type="Texture2D" uid="uid://cn52eth4n8j2v" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front6.png" id="32_fqq2o"]
+[ext_resource type="Texture2D" uid="uid://bjkm47ibljf0w" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back6.png" id="32_rx0eu"]
+[ext_resource type="Texture2D" uid="uid://fs48l41efwno" path="res://Assets/Enemies/corrupted_flame_spirit/side_back/cfs_side_back7.png" id="33_18kmb"]
+[ext_resource type="Texture2D" uid="uid://chqxaihjo45rt" path="res://Assets/Enemies/corrupted_flame_spirit/side_front/cfs_side_front7.png" id="33_bi7pi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h75br"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1nmgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fwayq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fgypr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o162f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lrsol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_glmv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w3mkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_k7o1o")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_yjc5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_l7lxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8v8vi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sxklf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_aempg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_dip0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hnwgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_q1cx6")
+}],
+"loop": true,
+"name": &"move_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_wympl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_h6h5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vda00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3drj7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_britt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_r4agc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_fqq2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_bi7pi")
+}],
+"loop": true,
+"name": &"move_side_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_bwdeq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_uhe5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_yuv6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_amjmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ttxdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ej44a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_rx0eu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_18kmb")
+}],
+"loop": true,
+"name": &"move_side_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xggaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i8iry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_alby6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qaixx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xx04e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gm53p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jntgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bledt")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vme1w"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g410"]
+size = Vector2(436, 657)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtxgf"]
+size = Vector2(806, 1108)
+
+[node name="BulletEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "cdwn_timer") groups=["enemy"]]
+collision_layer = 0
+script = ExtResource("1_di14r")
+lvl = 1
+lp = 50
+atk_formula = "50+(2-spirit)*10"
+cdwn = 1.5
+reward_formula = "70+(spirit-2)*10"
+enemy_name = "Corrupted Flame Spirit"
+hurtbox = NodePath("Hurtbox")
+cdwn_timer = NodePath("AttackCooldown")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h75br")
+animation = &"move_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_vme1w")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4.99999, -147.5)
+shape = SubResource("RectangleShape2D_2g410")
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(14, -101)
+shape = SubResource("RectangleShape2D_xtxgf")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_twclh")
+starting_state = NodePath("Follow")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_state")]
+script = ExtResource("4_b346c")
+follow_state = NodePath("../Follow")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state", "attack_range")]
+script = ExtResource("5_wi1dg")
+attack_state = NodePath("../Attack")
+attack_range = NodePath("../../AttackRange")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_state")]
+script = ExtResource("6_w7rp4")
+follow_state = NodePath("../Follow")
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("7_gsmju")
+speed = 10000.0
+dash_factor = 4.0
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true

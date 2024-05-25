@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cndc48c2sqais"]
+[gd_scene load_steps=30 format=3 uid="uid://cndc48c2sqais"]
 
 [ext_resource type="Script" path="res://Scripts/player_combat.gd" id="1_q5u5q"]
 [ext_resource type="Script" path="res://Scripts/combat_manager.gd" id="1_v6fvh"]
@@ -9,6 +9,13 @@
 [ext_resource type="Shader" path="res://Resources/Shaders/Progress.gdshader" id="5_02ceh"]
 [ext_resource type="Texture2D" uid="uid://xk8ji70ohc0a" path="res://Assets/Icons/inverted-triangle.png" id="5_dxvl1"]
 [ext_resource type="Script" path="res://Scripts/combat_ui.gd" id="5_fnolf"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="10_56keg"]
+[ext_resource type="Script" path="res://Scripts/States/state.gd" id="11_g2ghu"]
+[ext_resource type="Script" path="res://Scripts/States/player_dash.gd" id="11_ggysu"]
+[ext_resource type="Script" path="res://Scripts/States/player_move.gd" id="13_0kdff"]
+[ext_resource type="Script" path="res://Scripts/Components/move_component.gd" id="13_u57tr"]
+[ext_resource type="Script" path="res://Scripts/States/player_idle.gd" id="15_0k0mb"]
+[ext_resource type="PackedScene" uid="uid://drddman7um5jy" path="res://Scenes/Enemies/corrupted_flame_spirit.tscn" id="16_nn214"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o6bia"]
 normal = Vector2(1, 0)
@@ -316,14 +323,28 @@ shader_parameter/fill_direction = Vector2(1, 0)
 shader_parameter/unfilled_color = Color(0.333333, 0.333333, 0.333333, 1)
 shader_parameter/filled_color = Color(1, 1, 1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dttsu"]
-size = Vector2(130, 130)
+[sub_resource type="SpriteFrames" id="SpriteFrames_1rrrn"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hy0sj")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vme1w"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dttsu"]
 size = Vector2(130, 130)
 
 [node name="Combat" type="Node2D" node_paths=PackedStringArray("turn_cooldown", "combat_ui", "player")]
 process_mode = 3
+process_physics_priority = -1
 script = ExtResource("1_v6fvh")
 turn_cooldown = NodePath("TurnCooldown")
 combat_ui = NodePath("CombatUI")
@@ -355,13 +376,14 @@ position = Vector2(960, 1083)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom"]
 shape = SubResource("WorldBoundaryShape2D_d6n31")
 
-[node name="CombatUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("turn_cooldown", "turn_indicator", "btn_container", "turn_menu_anim")]
+[node name="CombatUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("turn_cooldown", "turn_indicator", "btn_container", "health_bar", "turn_menu_anim")]
 script = ExtResource("5_fnolf")
 turn_cooldown = NodePath("../TurnCooldown")
 turn_indicator = NodePath("MarginContainer/TurnIndicator")
 combat_submenu_btn_scn = ExtResource("3_b1d62")
 btn_container = NodePath("MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonContainer")
 enemy_name_btn_scene = ExtResource("4_5pjec")
+health_bar = NodePath("MarginContainer3/Healthbar")
 turn_menu_anim = NodePath("MarginContainer2/AnimationPlayer")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CombatUI"]
@@ -370,7 +392,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 390.0
+offset_top = 1080.0
+offset_right = 1920.0
+offset_bottom = 1470.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 50
@@ -433,7 +457,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -62.0
+offset_top = 1018.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 10
@@ -445,20 +471,28 @@ texture = ExtResource("5_dxvl1")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="TurnCooldown" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
-autostart = true
+[node name="MarginContainer3" type="MarginContainer" parent="CombatUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="Healthbar" type="ProgressBar" parent="CombatUI/MarginContainer3"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+value = 100.0
 
 [node name="Pausable" type="Node2D" parent="."]
 process_mode = 1
 
 [node name="Player" type="CharacterBody2D" parent="Pausable" groups=["player"]]
 position = Vector2(945, 870)
+collision_layer = 5
 script = ExtResource("1_q5u5q")
 
-[node name="Sprite" type="Sprite2D" parent="Pausable/Player"]
-texture = ExtResource("2_hy0sj")
+[node name="Sprite" type="AnimatedSprite2D" parent="Pausable/Player"]
+sprite_frames = SubResource("SpriteFrames_1rrrn")
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pausable/Player"]
 shape = SubResource("RectangleShape2D_dttsu")
@@ -476,25 +510,59 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="Enemy" type="AnimatableBody2D" parent="Pausable" groups=["enemy"]]
-position = Vector2(942, 248)
+[node name="Hand" type="Marker2D" parent="Pausable/Player"]
+position = Vector2(89, 39)
 
-[node name="Sprite" type="Sprite2D" parent="Pausable/Enemy"]
-modulate = Color(0.298039, 0.764706, 0.341176, 1)
-texture = ExtResource("2_hy0sj")
+[node name="MoveComponent" type="Node" parent="Pausable/Player"]
+script = ExtResource("13_u57tr")
+speed = 50000.0
+dash_factor = 4.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pausable/Enemy"]
-shape = SubResource("RectangleShape2D_vme1w")
+[node name="StateMachine" type="Node" parent="Pausable/Player" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("10_56keg")
+starting_state = NodePath("Idle")
 
-[node name="Enemy2" type="AnimatableBody2D" parent="Pausable" groups=["enemy"]]
-position = Vector2(1190, 248)
+[node name="Dash" type="Node" parent="Pausable/Player/StateMachine" node_paths=PackedStringArray("move_state", "dash_timer", "dash_cooldown")]
+script = ExtResource("11_ggysu")
+move_state = NodePath("../Move")
+dash_timer = NodePath("../../DashTimer")
+dash_cooldown = NodePath("../../DashCooldown")
 
-[node name="Sprite" type="Sprite2D" parent="Pausable/Enemy2"]
-modulate = Color(0.298039, 0.764706, 0.341176, 1)
-texture = ExtResource("2_hy0sj")
+[node name="Attack" type="Node" parent="Pausable/Player/StateMachine"]
+script = ExtResource("11_g2ghu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pausable/Enemy2"]
-shape = SubResource("RectangleShape2D_vme1w")
+[node name="Move" type="Node" parent="Pausable/Player/StateMachine" node_paths=PackedStringArray("dash_state", "attack_state", "idle_state", "dash_cooldown")]
+script = ExtResource("13_0kdff")
+dash_state = NodePath("../Dash")
+attack_state = NodePath("../Attack")
+idle_state = NodePath("../Idle")
+dash_cooldown = NodePath("../../DashCooldown")
 
+[node name="Idle" type="Node" parent="Pausable/Player/StateMachine" node_paths=PackedStringArray("move_state", "attack_state")]
+script = ExtResource("15_0k0mb")
+move_state = NodePath("../Move")
+attack_state = NodePath("../Attack")
+
+[node name="DashCooldown" type="Timer" parent="Pausable/Player"]
+one_shot = true
+
+[node name="BulletEnemy" parent="Pausable" instance=ExtResource("16_nn214")]
+position = Vector2(945, 345)
+scale = Vector2(0.4, 0.4)
+
+[node name="QuickItemCooldown1" type="Timer" parent="."]
+one_shot = true
+
+[node name="QuickItemCooldown2" type="Timer" parent="."]
+one_shot = true
+
+[node name="TurnCooldown" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Combat" to="CombatUI" method="_on_submenu_button_up" binds= ["combat"]]
 [connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Item" to="CombatUI" method="_on_submenu_button_up" binds= ["item"]]
+[connection signal="timeout" from="QuickItemCooldown1" to="." method="_on_quick_item_cooldown" binds= [0]]
+[connection signal="timeout" from="QuickItemCooldown2" to="." method="_on_quick_item_cooldown" binds= [1]]
 [connection signal="timeout" from="TurnCooldown" to="." method="_on_turn_cooldown_timeout"]

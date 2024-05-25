@@ -11,4 +11,4 @@ name = "sword"
 display_name = "Sword"
 description = "Deals 10 DMG"
 icon = ExtResource("1_1bcs4")
-cooldown = 5
+cooldown = 3

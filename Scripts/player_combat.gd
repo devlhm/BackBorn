@@ -1,36 +1,35 @@
 extends CharacterBody2D
 class_name CombatPlayer
 
-const SPEED = 1000
-var max_health = 100
-var health = max_health
-var dash_factor: float = 1
-@onready var dash_timer : Timer = $DashTimer
-var direction := Vector2.ZERO
+signal health_changed(new_health: int)
+
+var speed := 1000
+var max_health = 400 + (PlayerStats.attributes.vigor * 24)
+var health = max_health:
+	set(value):
+		health = value
+		health_changed.emit(value)
+
+@onready var state_machine: StateMachine = $StateMachine
+@onready var move_component: MoveComponent = $MoveComponent
 
 func _ready():
-	dash_timer.timeout.connect(on_dash_timer_timeout)
+	state_machine.init(self, $Sprite, move_component)
 
 func _physics_process(delta):
-	if dash_factor == 1:
-		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
-	
-	if direction:
-		if dash_factor > 1.0:
-			
-			var weight := dash_timer.time_left / dash_timer.wait_time
-			var from := SPEED * direction
-			var to := from * dash_factor
-			velocity = Vector2(EasingFunctions.ease_out_sine(from.x, to.x, weight), EasingFunctions.ease_out_sine(from.y, to.y, weight))
+	state_machine.process_physics(delta)
 
-		else:
-			velocity = direction * SPEED
+func _input(event):
+	state_machine.process_input(event)
 
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+func damage(amt: int):
+	print("ouch!")
+	#health -= amt
 
-	move_and_slide()
-
-func on_dash_timer_timeout():
-	dash_factor = 1
+func on_enemy_death(reward: int):
+	#TODO verificar a cura e lr
+	var heal_amt = min(reward, max_health - health)
+	reward -= heal_amt
+	health += heal_amt
+	if reward > 0:
+		PlayerStats.increase_lr(reward)

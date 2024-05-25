@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_e3q5p")
-name = "dash"
 cooldown = 1.0
-extra = {}
+name = "dash"
+display_name = "Dash"
+description = "Dashes"

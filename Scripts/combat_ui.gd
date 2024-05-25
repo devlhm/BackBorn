@@ -9,8 +9,9 @@ signal targets_selected
 @export var combat_submenu_btn_scn: PackedScene
 @export var btn_container: GridContainer
 @export var enemy_name_btn_scene: PackedScene
+@export var health_bar: ProgressBar
 
-var player: CombatPlayer
+@onready var player: CombatPlayer = get_tree().get_first_node_in_group("player")
 
 @export var turn_menu_anim: AnimationPlayer
 var submenu_selected := false
@@ -19,9 +20,12 @@ func _process(delta):
 	turn_indicator.material.set_shader_parameter("progress", 1 - (turn_cooldown.time_left / turn_cooldown.wait_time))
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel") and submenu_selected:
+	if event.is_action_pressed("ui_cancel") && submenu_selected && !turn_menu_anim.is_playing():
 		on_submenu_exit()
-
+		
+func on_plr_health_changed(new_health: int):
+	health_bar.value = ( new_health as float / player.max_health as float ) * 100
+	
 func on_turn_start():
 	turn_menu_anim.play("show")
 	
@@ -35,21 +39,31 @@ func on_turn_end():
 		
 
 func _on_submenu_button_up(button_name: String):
+	if turn_menu_anim.is_playing(): return
 	submenu_selected = true
 
 	match(button_name):
 		"item":
 			on_item_submenu()
+		"combat":
+			on_combat_submenu()
 
 	turn_menu_anim.play("show_2")
 
 func render_btn(title: String, desc: String, icon: Texture2D, enabled: bool, click_callback: Callable):
-		
+
 		var btn: Button = combat_submenu_btn_scn.instantiate()
 		(btn.get_node("MarginContainer/HBoxContainer/VBoxContainer/CellTitle") as Label).text = title
 		(btn.get_node("MarginContainer/HBoxContainer/VBoxContainer/CellDesc") as RichTextLabel).text = desc
 		(btn.get_node("MarginContainer/HBoxContainer/Icon") as TextureRect).texture = icon
-		btn.button_up.connect(click_callback)
+
+		btn.button_up.connect(func():
+			if turn_menu_anim.is_playing(): return
+			await click_callback.call()
+			turn_ended.emit()
+			on_turn_end()
+		)
+
 		btn.disabled = !enabled
 		btn_container.add_child(btn)
 
@@ -59,8 +73,12 @@ func clean_btn_container():
 		child.queue_free()
 
 func on_combat_submenu():
-	pass
-	
+	for combat_action in PlayerStats.unlocked_combat_actions:
+		render_btn(combat_action.display_name, combat_action.description, combat_action.icon, true, func(): 
+			var target = await select_target(combat_action.target, combat_action.target_amount)
+			combat_action.use(target)
+		)
+
 func on_empathy_submenu():
 	pass
 
@@ -72,12 +90,11 @@ func on_item_submenu():
 		render_btn(item.display_name, item.description, item.icon, item_usable, func(): 
 			var item_target = await select_target(item.target, item.target_amount)
 			item.use(item_target)
-			on_turn_end()
 			PlayerStats.on_item_use(i)
-			turn_ended.emit()
 		)
 	
 func on_submenu_exit():
+	
 	turn_menu_anim.play("hide_2")
 	turn_menu_anim.animation_finished.connect(func(anim): clean_btn_container(), CONNECT_ONE_SHOT)
 	submenu_selected = false

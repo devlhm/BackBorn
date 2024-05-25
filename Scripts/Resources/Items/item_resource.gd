@@ -1,15 +1,10 @@
-extends Resource
+extends CombatUsable
 class_name Item
 
 @export var max_uses: int = 1
-var uses: int = 0
 @export var target: Enums.COMBAT_TARGET
 @export var target_amount: int
 @export var target_amount_exact: bool
-@export var name: String
-@export var display_name: String
-@export var description: String
-@export var icon: Texture2D
 
 func use(target):
 	assert(false, name + "use function not implemented")

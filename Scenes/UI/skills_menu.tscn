@@ -1,9 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://gtt58lpvkv8"]
+[gd_scene load_steps=11 format=3 uid="uid://gtt58lpvkv8"]
 
 [ext_resource type="Script" path="res://Scripts/UI/skills_menu.gd" id="1_3poa2"]
 [ext_resource type="Theme" uid="uid://3hbxgl1r5fqc" path="res://Resources/Themes/skills_menu_theme.tres" id="1_5jcsq"]
 [ext_resource type="Texture2D" uid="uid://db5p1r4b0y3ha" path="res://Assets/Characters/Player/c_front.png" id="1_nkp5l"]
 [ext_resource type="Texture2D" uid="uid://ckgirja4bd8xx" path="res://Assets/UI/Skills Menu/ink_circle.png" id="4_s6g7n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48g5v"]
+size = Vector2(79.25, 155)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0niv"]
+size = Vector2(129, 68.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7vtr5"]
+size = Vector2(366, 135)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w2bw"]
 size = Vector2(1400, 1400)
@@ -45,7 +54,7 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(2, 2)
+size = Vector2i(862, 1080)
 render_target_update_mode = 4
 
 [node name="Character" type="Node2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport"]
@@ -63,6 +72,33 @@ texture = ExtResource("1_nkp5l")
 position = Vector2(0, -300)
 enabled = false
 zoom = Vector2(1.5, 1.5)
+
+[node name="EarsClickArea" type="Area2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character" groups=["head_part"]]
+process_mode = 4
+position = Vector2(-232, -282)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea"]
+position = Vector2(-9.375, 24.5)
+shape = SubResource("RectangleShape2D_48g5v")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea"]
+position = Vector2(474, 24.5)
+shape = SubResource("RectangleShape2D_48g5v")
+
+[node name="MouthClickArea" type="Area2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character" groups=["head_part"]]
+process_mode = 4
+position = Vector2(9, -174)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/MouthClickArea"]
+shape = SubResource("RectangleShape2D_u0niv")
+
+[node name="EyesClickArea" type="Area2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character" groups=["head_part"]]
+process_mode = 4
+position = Vector2(1, -311)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EyesClickArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_7vtr5")
 
 [node name="HandCamera" type="Camera2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character"]
 position = Vector2(151, 112)
@@ -634,7 +670,11 @@ text = "1"
 [node name="BG" type="Sprite2D" parent="."]
 texture_filter = 4
 texture_repeat = 1
+position = Vector2(-25, 0)
 texture = SubResource("GradientTexture2D_luipm")
 
+[connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea" to="." method="_on_click_area_input_event" binds= ["ears"]]
+[connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/MouthClickArea" to="." method="_on_click_area_input_event" binds= ["mouth"]]
+[connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EyesClickArea" to="." method="_on_click_area_input_event" binds= ["eyes"]]
 [connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HeadRing/ClickArea" to="." method="_on_click_area_input_event" binds= ["head"]]
 [connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HandRing/ClickArea" to="." method="_on_click_area_input_event" binds= ["hand"]]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CombatActionFear" load_steps=3 format=3 uid="uid://b68a3grift4u3"]
+
+[ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="1_1mnoy"]
+[ext_resource type="Script" path="res://Scripts/Resources/CombatActions/fear.gd" id="1_04da4"]
+
+[resource]
+script = ExtResource("1_04da4")
+duration_turns = 1
+speed_amount = 500
+target = 0
+target_amount = 1
+target_amount_exact = true
+type = 0
+name = "fear"
+display_name = "Fear"
+description = "Increases movement speed"
+icon = ExtResource("1_1mnoy")
