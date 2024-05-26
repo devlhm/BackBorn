@@ -34,6 +34,9 @@ cam_transition_time = 1.5
 main_camera = NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/MainCamera")
 head_camera = NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HeadCamera")
 hand_camera = NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HandCamera")
+labels = {
+"ears": NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea/Level")
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -84,6 +87,29 @@ shape = SubResource("RectangleShape2D_48g5v")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea"]
 position = Vector2(474, 24.5)
 shape = SubResource("RectangleShape2D_48g5v")
+
+[node name="AddBtn" type="Button" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea" groups=["btns", "btns_ears"]]
+visible = false
+offset_left = 500.0
+offset_right = 540.0
+offset_bottom = 40.0
+text = ">"
+
+[node name="RmvBtn" type="Button" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea" groups=["btns", "btns_ears"]]
+visible = false
+offset_left = 390.0
+offset_right = 430.0
+offset_bottom = 54.0
+text = "<
+   "
+
+[node name="Level" type="Label" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea" groups=["label_ears"]]
+visible = false
+offset_left = 465.0
+offset_top = 10.0
+offset_right = 505.0
+offset_bottom = 33.0
+text = "0"
 
 [node name="MouthClickArea" type="Area2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character" groups=["head_part"]]
 process_mode = 4
@@ -674,6 +700,8 @@ position = Vector2(-25, 0)
 texture = SubResource("GradientTexture2D_luipm")
 
 [connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea" to="." method="_on_click_area_input_event" binds= ["ears"]]
+[connection signal="button_down" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea/AddBtn" to="." method="_on_set_level_btn_down" binds= [true, "ears"]]
+[connection signal="button_down" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EarsClickArea/RmvBtn" to="." method="_on_set_level_btn_down" binds= [false, "ears"]]
 [connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/MouthClickArea" to="." method="_on_click_area_input_event" binds= ["mouth"]]
 [connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/EyesClickArea" to="." method="_on_click_area_input_event" binds= ["eyes"]]
 [connection signal="input_event" from="CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HeadRing/ClickArea" to="." method="_on_click_area_input_event" binds= ["head"]]

@@ -7,7 +7,7 @@ extends Node2D
 
 var init_camera_zoom: Vector2
 var init_camera_pos: Vector2
-var selected_bodypart := false
+var selected_bodypart = null
 var selected_camera: Camera2D
 var selected_stat = null:
 	set(value):
@@ -16,6 +16,7 @@ var selected_stat = null:
 var zooming := false
 var zoomed := false
 var required_lr = 600 + pow(2*PlayerStats.lvl,2)
+@export var labels: Dictionary
 func _ready():
 	init_camera_zoom = main_camera.zoom
 	init_camera_pos = main_camera.global_position
@@ -30,6 +31,7 @@ func _input(event):
 				part.process_mode = Node.PROCESS_MODE_INHERIT
 		
 		selected_camera = null
+		selected_bodypart = null
 		get_tree().call_group("ring", "show")
 		zoom_to(main_camera, init_camera_pos, init_camera_zoom)
 
@@ -38,6 +40,10 @@ func _on_click_area_input_event(viewport, event, shape_idx, id):
 		print(id)
 		if(zooming):
 			return
+		get_tree().call_group("btns", "hide")
+		
+		for label_path in labels.values():
+			get_node(label_path).hide()
 			
 		if selected_bodypart and selected_camera == head_camera and zoomed:
 			match(id):
@@ -49,11 +55,13 @@ func _on_click_area_input_event(viewport, event, shape_idx, id):
 					selected_stat = Enums.STATS.HEARING
 				"nose":
 					selected_stat = Enums.STATS.SMELL
+					
 				
 		bodypart_selected(id)
 
 func bodypart_selected(id: String):
 	get_tree().call_group("ring", "hide")
+	
 
 	match(id):
 		"head":
@@ -64,7 +72,13 @@ func bodypart_selected(id: String):
 			selected_camera = hand_camera
 			selected_stat = Enums.STATS.TOUCH
 
-	selected_bodypart = true
+	if id != "head":
+		get_tree().call_group("btns_" + id, "show")
+		var label = get_node(labels[id])
+		label.text = str(PlayerStats.stats[selected_stat])
+		label.show()
+		
+	selected_bodypart = id
 	if selected_camera:
 		zoom_to(main_camera, selected_camera.global_position,selected_camera.zoom)
 
@@ -113,3 +127,15 @@ func level_up(stat: Enums.STATS):
 
 func on_stat_selected(stat):
 	pass
+
+
+func _on_add_btn_button_down():
+	print("down")
+
+
+func _on_set_level_btn_down(increase: bool, id: String):
+	var label : Label = get_node(labels[id])
+	if increase:
+		label.text = str(min(int(label.text) + 1, 99))
+	else:
+		label.text = str(max(int(label.text) - 1, PlayerStats.stats[selected_stat]))
