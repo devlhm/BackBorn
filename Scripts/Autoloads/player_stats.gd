@@ -27,7 +27,7 @@ var attributes = {
 }
 
 var lvl: int = 1
-var lr: int = 0
+var lr: int = 1000
 var inventory = [{"item": load_item("date"), "uses":0}, {"item": load_item("poison"), "uses": 0}]
 var equipped_skills: Array[CombatSkill] = [load_combat_skill("dash"), null]
 var equipped_quick_items: Array[QuickItem] = [load_quick_item("sword"), null]
