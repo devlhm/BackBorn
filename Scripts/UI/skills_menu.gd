@@ -5,6 +5,7 @@ class_name SkillsMenu
 #TODO adicionar funcionalidade e botao de subir o nivel
 #TODO organizar melhor a ui das setinhas e label
 
+@export var ui_side: VBoxContainer
 @export var cam_transition_time: float
 @export var main_camera: Camera2D
 @export var head_camera: Camera2D
@@ -17,8 +18,6 @@ var selected_camera: Camera2D
 var selected_stat = null
 var zooming := false
 var zoomed := false
-var required_lr = 600 + pow(2*PlayerStats.lvl,2)
-@export var labels: Dictionary
 
 func _ready():
 	init_camera_zoom = main_camera.zoom
@@ -26,6 +25,9 @@ func _ready():
 	
 	for part in get_tree().get_nodes_in_group("bodypart"):
 		part.selected.connect(on_bodypart_selected)
+		part.selected.connect(func(bodypart, stat): ui_side.on_stat_selected(stat))
+		part.desired_lvl_changed.connect(ui_side.on_desired_lvl_changed)
+		ui_side.level_up_req.connect(level_up)
 	
 func _input(event):
 	if event.is_action_pressed("ui_cancel") and selected_camera:
@@ -49,9 +51,6 @@ func _on_click_area_input_event(viewport, event, shape_idx, id):
 	if event is InputEventMouseButton && event.pressed:
 		if(zooming):
 			return
-		
-		for label_path in labels.values():
-			get_node(label_path).hide()
 			
 		if selected_camera == head_camera and zoomed:
 			pass
@@ -93,14 +92,14 @@ static func get_required_lr(lvl, lvl_max = null):
 		var lvl_diff = lvl_max - lvl
 		var acc: int = 0
 		
-		for i in range(lvl + 1, lvl_max):
+		for i in range(lvl + 1, lvl_max + 1):
 			print(i)
 			acc += 600 + pow(2*i, 2)
 		return acc
 		
 	return 600 + pow(2*lvl, 2)
 
-func level_up(stat: Enums.STATS, amt):
+func level_up(stat: Enums.STATS, amt: int, cost: int):
 	if PlayerStats.lvl < 6 and PlayerStats.lvl + amt >= 6:
 		match stat:
 			Enums.STATS.SIGHT:
@@ -125,6 +124,7 @@ func level_up(stat: Enums.STATS, amt):
 				
 	PlayerStats.lvl += amt
 	PlayerStats.stats[stat] += amt
+	PlayerStats.lr -= cost
 
 func on_bodypart_selected(bodypart: SkillBodypart, stat):
 	selected_bodypart = bodypart

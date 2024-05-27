@@ -61,7 +61,7 @@ size = Vector2(300, 300)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfxui"]
 points = PackedVector3Array(-150, 0, -150, -150, 0, 150, 150, 0, -150, 150, 0, 150)
 
-[sub_resource type="Resource" id="Resource_b6tne"]
+[sub_resource type="Resource" id="Resource_q56dg"]
 script = ExtResource("12_wss8h")
 amount = 5000
 enabled = true
@@ -70,7 +70,7 @@ custom_seed = 200
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_b66yi"]
+[sub_resource type="Resource" id="Resource_b6ihx"]
 script = ExtResource("13_fba1u")
 position = Vector3(0.8, 0, 0.8)
 rotation = Vector3(0, 0, 0)
@@ -81,7 +81,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_kw27j"]
+[sub_resource type="Resource" id="Resource_yqlnr"]
 script = ExtResource("14_put4h")
 iterations = 5
 offset_step = 1.0
@@ -93,15 +93,15 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_tiqn3"]
+[sub_resource type="Resource" id="Resource_ytm60"]
 script = ExtResource("11_6n0sy")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_b6tne"), SubResource("Resource_b66yi"), SubResource("Resource_kw27j")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_q56dg"), SubResource("Resource_b6ihx"), SubResource("Resource_yqlnr")])
 
 [sub_resource type="Resource" id="Resource_ftaap"]
 script = ExtResource("17_swu1m")
 size = Vector3(295, 1, 295)
 
-[sub_resource type="Resource" id="Resource_oxfh5"]
+[sub_resource type="Resource" id="Resource_w8a0t"]
 script = ExtResource("12_wss8h")
 amount = 2000
 enabled = true
@@ -110,7 +110,7 @@ custom_seed = 200
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_dgmys"]
+[sub_resource type="Resource" id="Resource_wxetn"]
 script = ExtResource("13_fba1u")
 position = Vector3(0.8, 0, 0.8)
 rotation = Vector3(0, 0, 0)
@@ -121,7 +121,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_udo4m"]
+[sub_resource type="Resource" id="Resource_sohec"]
 script = ExtResource("14_put4h")
 iterations = 5
 offset_step = 1.0
@@ -133,7 +133,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_o6gc1"]
+[sub_resource type="Resource" id="Resource_k35gr"]
 script = ExtResource("17_5by6r")
 operation = 1
 scale = Vector3(0.5, 0.5, 0.5)
@@ -143,9 +143,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_70i36"]
+[sub_resource type="Resource" id="Resource_0rhke"]
 script = ExtResource("11_6n0sy")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_oxfh5"), SubResource("Resource_dgmys"), SubResource("Resource_udo4m"), SubResource("Resource_o6gc1")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_w8a0t"), SubResource("Resource_wxetn"), SubResource("Resource_sohec"), SubResource("Resource_k35gr")])
 
 [sub_resource type="Resource" id="Resource_ckvrp"]
 script = ExtResource("17_swu1m")
@@ -226,7 +226,7 @@ shape = SubResource("ConvexPolygonShape3D_mfxui")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 script = ExtResource("10_pg2h4")
 enable_updates_in_game = true
-modifier_stack = SubResource("Resource_tiqn3")
+modifier_stack = SubResource("Resource_ytm60")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -264,7 +264,7 @@ shape = SubResource("Resource_ftaap")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195, 0)
 script = ExtResource("10_pg2h4")
 enable_updates_in_game = true
-modifier_stack = SubResource("Resource_70i36")
+modifier_stack = SubResource("Resource_0rhke")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 

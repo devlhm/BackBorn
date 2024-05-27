@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://gtt58lpvkv8"]
+[gd_scene load_steps=13 format=3 uid="uid://gtt58lpvkv8"]
 
 [ext_resource type="Script" path="res://Scripts/UI/skills_menu.gd" id="1_3poa2"]
 [ext_resource type="Theme" uid="uid://3hbxgl1r5fqc" path="res://Resources/Themes/skills_menu_theme.tres" id="1_5jcsq"]
 [ext_resource type="Texture2D" uid="uid://db5p1r4b0y3ha" path="res://Assets/Characters/Player/c_front.png" id="1_nkp5l"]
 [ext_resource type="Texture2D" uid="uid://ckgirja4bd8xx" path="res://Assets/UI/Skills Menu/ink_circle.png" id="4_s6g7n"]
 [ext_resource type="Script" path="res://Scripts/UI/skill_bodypart.gd" id="4_vs5dj"]
+[ext_resource type="Script" path="res://Scripts/skills_menu_ui_side.gd" id="6_wc0w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0niv"]
 size = Vector2(129, 68.25)
@@ -28,16 +29,14 @@ gradient = SubResource("Gradient_skd61")
 width = 3840
 height = 2160
 
-[node name="SkillsMenu" type="Node2D" node_paths=PackedStringArray("main_camera", "head_camera", "hand_camera")]
+[node name="SkillsMenu" type="Node2D" node_paths=PackedStringArray("ui_side", "main_camera", "head_camera", "hand_camera")]
 position = Vector2(955, 540)
 script = ExtResource("1_3poa2")
+ui_side = NodePath("CanvasLayer/HBoxContainer/UISide")
 cam_transition_time = 1.5
 main_camera = NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/MainCamera")
 head_camera = NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HeadCamera")
 hand_camera = NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/HandCamera")
-labels = {
-"ears": NodePath("CanvasLayer/HBoxContainer/CharacterSide/SubViewport/Character/Ears/ClickArea/Level")
-}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -177,6 +176,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.55
 theme = ExtResource("1_5jcsq")
+script = ExtResource("6_wc0w4")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/UISide"]
 layout_mode = 2

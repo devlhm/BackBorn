@@ -10,6 +10,7 @@ class_name SkillBodypart
 var desired_lvl: int
 var exceeding: bool = false
 signal selected(bodypart, stat)
+signal desired_lvl_changed(val, stat, cost, exceeding)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,18 +45,20 @@ func deselect():
 	rmv_btn.hide()
 	
 func lvl_btn_down(increase: bool):
+
+	
 	if increase:
 		if !exceeding:
 			desired_lvl = min(desired_lvl + 1, 99)
-			
-		var new_plr_lvl = PlayerStats.lvl + (desired_lvl - PlayerStats.stats[stat]) + 1
-		var req_lr = SkillsMenu.get_required_lr(PlayerStats.lvl, new_plr_lvl)
-		print(desired_lvl)
-
-		if req_lr > PlayerStats.lr && !exceeding:
-			exceeding = true
 	else:
 		desired_lvl = max(PlayerStats.stats[stat], desired_lvl - 1)
 		exceeding = false
 		
+	var new_plr_lvl = PlayerStats.lvl + ((desired_lvl) - PlayerStats.stats[stat])
+	var req_lr = SkillsMenu.get_required_lr(PlayerStats.lvl, new_plr_lvl)
+	
+	if req_lr > PlayerStats.lr && !exceeding:
+		exceeding = true
+		
 	label.text = str(desired_lvl)
+	desired_lvl_changed.emit(stat, desired_lvl, req_lr, exceeding)
