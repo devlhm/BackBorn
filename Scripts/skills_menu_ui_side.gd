@@ -4,26 +4,36 @@ extends VBoxContainer
 @export var confirm_btn: Button
 @export var curr_lvl_label: Label
 @export var desired_lvl_label: Label
+@export var leveling_info: HBoxContainer
 
-var selected_stat: Enums.STATS
+var selected_stat
 var exceeding: bool = false
 signal level_up_req(stat, amt, cost)
+
 
 func _ready():
 	confirm_btn.button_down.connect(on_confirm_btn_down)
 
-func reset(stat: Enums.STATS):
+func reset():
+	leveling_info.modulate.a = 0
+	selected_stat = null
+
+func select(stat: Enums.STATS):
+	leveling_info.modulate.a = 1
+	
 	exceeding = false
 	selected_stat = stat
 	cost_label.text = "0"
 	curr_lvl_label.text = str(PlayerStats.stats[stat])
 	desired_lvl_label.text = curr_lvl_label.text
-	
-func on_stat_selected(stat: Enums.STATS):
-	reset(stat)
+	print("arruma")
 
-func on_desired_lvl_changed(val: int, stat: Enums.STATS, cost: int, excd: bool):
+func on_stat_selected(stat: Enums.STATS):
+	select(stat)
+
+func on_desired_lvl_changed(stat: Enums.STATS, val: int, cost: int, excd: bool):
 	exceeding = excd
+	print(val)
 	if exceeding:
 		print("exceeding")
 		
@@ -31,7 +41,8 @@ func on_desired_lvl_changed(val: int, stat: Enums.STATS, cost: int, excd: bool):
 	desired_lvl_label.text = str(val)
 
 func on_confirm_btn_down():
+	print("confirm")
 	var amt = int(desired_lvl_label.text) - PlayerStats.stats[selected_stat]
 	if amt > 0 && !exceeding:
 		level_up_req.emit(selected_stat, amt, int(cost_label.text))
-		reset(selected_stat)
+		select(selected_stat)

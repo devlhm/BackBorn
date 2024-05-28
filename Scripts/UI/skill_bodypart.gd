@@ -45,11 +45,10 @@ func deselect():
 	rmv_btn.hide()
 	
 func lvl_btn_down(increase: bool):
-
-	
 	if increase:
 		if !exceeding:
 			desired_lvl = min(desired_lvl + 1, 99)
+
 	else:
 		desired_lvl = max(PlayerStats.stats[stat], desired_lvl - 1)
 		exceeding = false
