@@ -1,9 +1,8 @@
-extends Node2D
+extends Node3D
 class_name CombatSkillManager
 
 var can_use_skill := [null, null]
 @onready var skill_timers := [$Skill1Cooldown, $Skill2Cooldown]
-@onready var player: CombatPlayer = get_parent()
 
 func _ready():
 	for i in PlayerStats.equipped_skills.size():
@@ -26,9 +25,8 @@ func use_skill(index: int):
 	can_use_skill[index] = false
 	
 	match (PlayerStats.equipped_skills[index] as CombatSkill).name:
-		"Dash":
-			player.dash_factor = 3
-			player.dash_timer.start()
+		"_":
+			pass
 
 func on_skill_cooldown_timeout(index: int):
 	can_use_skill[index] = true

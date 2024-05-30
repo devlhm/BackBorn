@@ -4,28 +4,34 @@ class_name CombatUI
 signal turn_ended
 signal targets_selected
 
-@export var turn_cooldown: Timer
 @export var turn_indicator: TextureRect
 @export var combat_submenu_btn_scn: PackedScene
 @export var btn_container: GridContainer
 @export var enemy_name_btn_scene: PackedScene
 @export var health_bar: ProgressBar
 
-@onready var player: CombatPlayer = get_tree().get_first_node_in_group("player")
-
 @export var turn_menu_anim: AnimationPlayer
 var submenu_selected := false
 
-func _process(delta):
-	turn_indicator.material.set_shader_parameter("progress", 1 - (turn_cooldown.time_left / turn_cooldown.wait_time))
+func on_combat_start():
+	update_turn_indicator(0)
+	health_bar.value = 100
+
+	turn_indicator.show()
+
+func on_combat_end():
+	turn_indicator.hide()
+
+func update_turn_indicator(progress):
+	turn_indicator.material.set_shader_parameter("progress", progress)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel") && submenu_selected && !turn_menu_anim.is_playing():
 		on_submenu_exit()
 		
-func on_plr_health_changed(new_health: int):
-	health_bar.value = ( new_health as float / player.max_health as float ) * 100
-	
+func on_plr_health_changed(new_health: int, max_health: int):
+	health_bar.value = ( new_health as float / max_health as float ) * 100
+
 func on_turn_start():
 	turn_menu_anim.play("show")
 	
@@ -35,7 +41,7 @@ func on_turn_end():
 	else:
 		submenu_selected = false
 		turn_menu_anim.play("hide_3")
-		turn_menu_anim.animation_finished.connect(func(anim): clean_btn_container(), CONNECT_ONE_SHOT)
+		turn_menu_anim.animation_finished.connect(func(_anim): clean_btn_container(), CONNECT_ONE_SHOT)
 		
 
 func _on_submenu_button_up(button_name: String):

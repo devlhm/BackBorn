@@ -9,7 +9,7 @@ class_name Item
 func use(target):
 	assert(false, name + "use function not implemented")
 
-func is_usable(player: CombatPlayer, enemies: Array[Node]) -> bool:
+func is_usable(player: Player, enemies: Array[Node]) -> bool:
 	if(target_amount_exact && target == Enums.COMBAT_TARGET.ENEMY && enemies.size() < target_amount):
 		return false
 	

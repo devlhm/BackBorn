@@ -7,15 +7,15 @@ var turns = 0
 var player
 
 func use(target):
-	var player = target as CombatPlayer
+	var player = target as Player
 	self.player = player
-	player.speed += speed_amount
+	target.move_component.speed += speed_amount
 	
 func on_expire():
-	player.speed -= speed_amount
+	player.move_component.speed -= speed_amount
 
 func on_turn_end():
 	turns += 1
-	player.speed -= speed_amount
+	player.move_component.speed -= speed_amount
 	if duration_turns == turns:
 		on_expire()

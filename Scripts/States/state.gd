@@ -3,10 +3,10 @@ extends Node
 
 @export var animation_name: String
 
-var animations: AnimatedSprite2D
-var parent: CharacterBody2D
+var animations: AnimatedSprite3D
+var parent: CharacterBody3D
 var move_component: MoveComponent
-var player: CharacterBody2D
+#var player: CharacterBody3D
 
 func enter() -> void:
 	if animation_name:

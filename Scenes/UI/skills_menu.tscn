@@ -62,7 +62,7 @@ hand_ring = NodePath("SubViewport/Character/HandRing")
 transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(862, 1080)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Character" type="Node2D" parent="CanvasLayer/HBoxContainer/CharacterSide/SubViewport"]
@@ -176,7 +176,7 @@ color = Color(0.521569, 0.643137, 0.976471, 1)
 energy = 0.5
 blend_mode = 2
 
-[node name="UISide" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" node_paths=PackedStringArray("cost_label", "confirm_btn", "curr_lvl_label", "desired_lvl_label", "leveling_info")]
+[node name="UISide" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" node_paths=PackedStringArray("cost_label", "confirm_btn", "curr_lvl_label", "desired_lvl_label", "leveling_info", "lr")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.55
@@ -187,6 +187,7 @@ confirm_btn = NodePath("MarginContainer2/VBoxContainer/LevelingInfo/MarginContai
 curr_lvl_label = NodePath("MarginContainer2/VBoxContainer/LevelingInfo/HBoxContainer/CurrLvl")
 desired_lvl_label = NodePath("MarginContainer2/VBoxContainer/LevelingInfo/HBoxContainer/DesiredLvl")
 leveling_info = NodePath("MarginContainer2/VBoxContainer/LevelingInfo")
+lr = NodePath("MarginContainer2/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/LRAmount")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/UISide"]
 layout_mode = 2

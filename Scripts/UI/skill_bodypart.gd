@@ -16,7 +16,7 @@ signal desired_lvl_changed(val, stat, cost, exceeding)
 func _ready():
 	deselect()
 	
-	click_area.input_event.connect(func(viewport, event, shape_idx):
+	click_area.input_event.connect(func(_viewport, event, _shape_idx):
 		if event is InputEventMouseButton && event.pressed:
 			select()
 	)

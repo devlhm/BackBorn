@@ -1,48 +1,51 @@
 extends CharacterBody3D
 class_name Player
 
-const SPEED = 5
-const STOP_SPEED = 5
+signal health_changed(new_health: int)
+
 var frozen = false
 
-@onready var sprite: AnimatedSprite3D = $Sprite
-@export var move_component: MoveComponent
+var max_health = 400 + (PlayerStats.attributes.vigor * 24)
+var health = max_health:
+	set(value):
+		health = value
+		health_changed.emit(value, max_health)
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var state_machine: StateMachine = $StateMachine
+@onready var move_component: MoveComponent = $MoveComponent
+@onready var sprite: AnimatedSprite3D = $Sprite
+@onready var hand: Marker3D = $Hand
+
+func _ready():
+	state_machine.init(self, sprite, move_component)
+	sprite.play("move_down")
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
 	if frozen:
 		return
-		
-	sprite.play()
-
-	if Input.is_action_pressed("ui_up"):
-		sprite.animation = "walk_up"
-	elif Input.is_action_pressed("ui_left"):
-		sprite.animation = "walk_left"
-	elif Input.is_action_pressed("ui_right"):
-		sprite.animation = "walk_right"
-	elif Input.is_action_pressed("ui_down"):
-		sprite.animation = "walk_down"
-	else:
-		sprite.stop()
-		sprite.frame = 2
-
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, STOP_SPEED)
-		velocity.z = move_toward(velocity.z, 0, STOP_SPEED)
 	
-	move_and_slide()
+	state_machine.process_physics(delta)
+
+func _input(event):
+	state_machine.process_input(event)
+
+func instance_at_hand(instance):
+	for child in hand.get_children():
+		hand.remove_child(child)
+		child.queue_free()
+
+	hand.add_child(instance)
+
+func damage(amt: int):
+	print("ouch!")
+	#health -= amt
+
+func on_enemy_death(reward: int):
+	var heal_amt = min(reward, max_health - health)
+	reward -= heal_amt
+	health += heal_amt
+	if reward > 0:
+		PlayerStats.increase_lr(reward)
 
 func freeze():
 	frozen = true

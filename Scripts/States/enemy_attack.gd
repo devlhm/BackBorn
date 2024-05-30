@@ -7,6 +7,7 @@ func enter() -> void:
 	var expression = Expression.new()
 	expression.parse(parent.atk_formula, ["spirit"])
 	var atk = expression.execute([PlayerStats.attributes.spirit])
+	var player: Player = get_tree().get_first_node_in_group("player")
 	player.damage(atk)
 	parent.cdwn_timer.start()
 	super()

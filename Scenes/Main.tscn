@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dy3ltwjcfjppl"]
+[gd_scene load_steps=56 format=3 uid="uid://dy3ltwjcfjppl"]
 
 [ext_resource type="Script" path="res://Scripts/overworld_controller.gd" id="1_b4mba"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="4_74wgl"]
@@ -18,7 +18,15 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="17_5by6r"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="17_3185g"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="17_swu1m"]
+[ext_resource type="PackedScene" uid="uid://drddman7um5jy" path="res://Scenes/Enemies/corrupted_flame_spirit.tscn" id="19_muvq5"]
 [ext_resource type="Texture2D" uid="uid://ca5oa03eltseo" path="res://Assets/Characters/character_test.png" id="19_qckg6"]
+[ext_resource type="Script" path="res://Scripts/combat_manager.gd" id="20_0esdj"]
+[ext_resource type="Script" path="res://Scripts/combat_ui.gd" id="21_8puhm"]
+[ext_resource type="PackedScene" uid="uid://dr33blco6e6f3" path="res://Scenes/UI/combat_submenu_btn.tscn" id="22_3qdit"]
+[ext_resource type="Script" path="res://Scripts/combat_skill_manager.gd" id="22_xbhom"]
+[ext_resource type="PackedScene" uid="uid://b5jby3b0oi4jg" path="res://Scenes/UI/combat_enemy_name.tscn" id="23_b6sqf"]
+[ext_resource type="Shader" path="res://Resources/Shaders/Progress.gdshader" id="24_4g7jo"]
+[ext_resource type="Texture2D" uid="uid://xk8ji70ohc0a" path="res://Assets/Icons/inverted-triangle.png" id="25_pb3v3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vfts0"]
 sky_horizon_color = Color(0.64625, 0.655657, 0.670833, 1)
@@ -61,7 +69,7 @@ size = Vector2(300, 300)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mfxui"]
 points = PackedVector3Array(-150, 0, -150, -150, 0, 150, 150, 0, -150, 150, 0, 150)
 
-[sub_resource type="Resource" id="Resource_ftfdg"]
+[sub_resource type="Resource" id="Resource_5g3sa"]
 script = ExtResource("12_wss8h")
 amount = 5000
 enabled = true
@@ -70,7 +78,7 @@ custom_seed = 200
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_oj586"]
+[sub_resource type="Resource" id="Resource_d68um"]
 script = ExtResource("13_fba1u")
 position = Vector3(0.8, 0, 0.8)
 rotation = Vector3(0, 0, 0)
@@ -81,7 +89,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_yorbk"]
+[sub_resource type="Resource" id="Resource_h3j0s"]
 script = ExtResource("14_put4h")
 iterations = 5
 offset_step = 1.0
@@ -93,15 +101,15 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_lawus"]
+[sub_resource type="Resource" id="Resource_ocsd0"]
 script = ExtResource("11_6n0sy")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_ftfdg"), SubResource("Resource_oj586"), SubResource("Resource_yorbk")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_5g3sa"), SubResource("Resource_d68um"), SubResource("Resource_h3j0s")])
 
 [sub_resource type="Resource" id="Resource_ftaap"]
 script = ExtResource("17_swu1m")
 size = Vector3(295, 1, 295)
 
-[sub_resource type="Resource" id="Resource_e6o26"]
+[sub_resource type="Resource" id="Resource_wp2r4"]
 script = ExtResource("12_wss8h")
 amount = 2000
 enabled = true
@@ -110,7 +118,7 @@ custom_seed = 200
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_bkwyy"]
+[sub_resource type="Resource" id="Resource_nig75"]
 script = ExtResource("13_fba1u")
 position = Vector3(0.8, 0, 0.8)
 rotation = Vector3(0, 0, 0)
@@ -121,7 +129,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_s20fm"]
+[sub_resource type="Resource" id="Resource_p6i8o"]
 script = ExtResource("14_put4h")
 iterations = 5
 offset_step = 1.0
@@ -133,7 +141,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_iy6ef"]
+[sub_resource type="Resource" id="Resource_fwowa"]
 script = ExtResource("17_5by6r")
 operation = 1
 scale = Vector3(0.5, 0.5, 0.5)
@@ -143,9 +151,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_p4mu8"]
+[sub_resource type="Resource" id="Resource_65xs6"]
 script = ExtResource("11_6n0sy")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_e6o26"), SubResource("Resource_bkwyy"), SubResource("Resource_s20fm"), SubResource("Resource_iy6ef")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_wp2r4"), SubResource("Resource_nig75"), SubResource("Resource_p6i8o"), SubResource("Resource_fwowa")])
 
 [sub_resource type="Resource" id="Resource_ckvrp"]
 script = ExtResource("17_swu1m")
@@ -170,9 +178,306 @@ albedo_texture = ExtResource("19_qckg6")
 material = SubResource("StandardMaterial3D_dsb2i")
 size = Vector2(1.5, 1.7)
 
-[node name="Overworld" type="Node3D" node_paths=PackedStringArray("player") groups=["overworld_controller"]]
+[sub_resource type="Animation" id="Animation_p6jwj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1018)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../MarginContainer:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 62)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 390)]
+}
+
+[sub_resource type="Animation" id="Animation_0vcaf"]
+resource_name = "hide_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 690), Vector2(0, 830)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 640), Vector2(0, 780)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_bie4m"]
+resource_name = "hide_3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 690), Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 640), Vector2(0, 1018)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_vm1b2"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 830)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1018), Vector2(0, 780)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_gbcc7"]
+resource_name = "show_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 830), Vector2(0, 690)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../MarginContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 780), Vector2(0, 640)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/SubmenuSelector:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/ScrollContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_21g8a"]
+_data = {
+"RESET": SubResource("Animation_p6jwj"),
+"hide_2": SubResource("Animation_0vcaf"),
+"hide_3": SubResource("Animation_bie4m"),
+"show": SubResource("Animation_vm1b2"),
+"show_2": SubResource("Animation_gbcc7")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a76a1"]
+shader = ExtResource("24_4g7jo")
+shader_parameter/progress = 1.0
+shader_parameter/fill_direction = Vector2(1, 0)
+shader_parameter/unfilled_color = Color(0.333333, 0.333333, 0.333333, 1)
+shader_parameter/filled_color = Color(1, 1, 1, 1)
+
+[node name="Overworld" type="Node3D" node_paths=PackedStringArray("player", "combat_ui", "combat_manager") groups=["overworld_controller"]]
 script = ExtResource("1_b4mba")
 player = NodePath("Player")
+combat_ui = NodePath("CombatManager/CombatUI")
+combat_manager = NodePath("CombatManager")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xr3ou")
@@ -226,7 +531,7 @@ shape = SubResource("ConvexPolygonShape3D_mfxui")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 script = ExtResource("10_pg2h4")
 enable_updates_in_game = true
-modifier_stack = SubResource("Resource_lawus")
+modifier_stack = SubResource("Resource_ocsd0")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -264,7 +569,7 @@ shape = SubResource("Resource_ftaap")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195, 0)
 script = ExtResource("10_pg2h4")
 enable_updates_in_game = true
-modifier_stack = SubResource("Resource_p4mu8")
+modifier_stack = SubResource("Resource_65xs6")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 
@@ -340,6 +645,140 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0.
 [node name="dead_tree_13" parent="Scenery/Trees" instance=ExtResource("9_bbbbi")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0.01, -6)
 
+[node name="BulletEnemy" parent="." instance=ExtResource("19_muvq5")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 8.2, 0.525352, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.8, 0)
 mesh = SubResource("QuadMesh_84xq6")
+
+[node name="CombatManager" type="Node3D" parent="." node_paths=PackedStringArray("turn_cooldown", "combat_ui")]
+script = ExtResource("20_0esdj")
+turn_cooldown = NodePath("TurnCooldown")
+combat_ui = NodePath("CombatUI")
+
+[node name="CombatUI" type="CanvasLayer" parent="CombatManager" node_paths=PackedStringArray("turn_indicator", "btn_container", "health_bar", "turn_menu_anim")]
+process_mode = 3
+script = ExtResource("21_8puhm")
+turn_indicator = NodePath("MarginContainer/TurnIndicator")
+combat_submenu_btn_scn = ExtResource("22_3qdit")
+btn_container = NodePath("MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonContainer")
+enemy_name_btn_scene = ExtResource("23_b6sqf")
+health_bar = NodePath("MarginContainer3/Healthbar")
+turn_menu_anim = NodePath("MarginContainer2/AnimationPlayer")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CombatManager/CombatUI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 390.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="CombatManager/CombatUI/MarginContainer2"]
+custom_minimum_size = Vector2(0, 390)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 25
+
+[node name="SubmenuSelector" type="HBoxContainer" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="Combat" type="Button" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Combat
+"
+
+[node name="Empathy" type="Button" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Empathy"
+
+[node name="Item" type="Button" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ButtonContainer" type="GridContainer" parent="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 40
+columns = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CombatManager/CombatUI/MarginContainer2"]
+root_node = NodePath("../PanelContainer")
+libraries = {
+"": SubResource("AnimationLibrary_21g8a")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CombatManager/CombatUI"]
+custom_minimum_size = Vector2(1920, 62)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="TurnIndicator" type="TextureRect" parent="CombatManager/CombatUI/MarginContainer"]
+material = SubResource("ShaderMaterial_a76a1")
+layout_mode = 2
+texture = ExtResource("25_pb3v3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="CombatManager/CombatUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="Healthbar" type="ProgressBar" parent="CombatManager/CombatUI/MarginContainer3"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+value = 100.0
+
+[node name="TurnCooldown" type="Timer" parent="CombatManager"]
+one_shot = true
+
+[node name="QuickItemCooldown1" type="Timer" parent="CombatManager"]
+one_shot = true
+
+[node name="QuickItemCooldown2" type="Timer" parent="CombatManager"]
+one_shot = true
+
+[node name="SkillManager" type="Node3D" parent="CombatManager"]
+script = ExtResource("22_xbhom")
+
+[node name="Skill1Cooldown" type="Timer" parent="CombatManager/SkillManager"]
+one_shot = true
+
+[node name="Skill2Cooldown" type="Timer" parent="CombatManager/SkillManager"]
+one_shot = true
+
+[connection signal="button_up" from="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Combat" to="CombatManager/CombatUI" method="_on_submenu_button_up" binds= ["combat"]]
+[connection signal="button_up" from="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Empathy" to="CombatManager/CombatUI" method="_on_submenu_button_up" binds= ["empathy"]]
+[connection signal="button_up" from="CombatManager/CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Item" to="CombatManager/CombatUI" method="_on_submenu_button_up" binds= ["item"]]
+[connection signal="timeout" from="CombatManager/TurnCooldown" to="CombatManager" method="_on_turn_cooldown_timeout"]
+[connection signal="timeout" from="CombatManager/QuickItemCooldown1" to="CombatManager" method="_on_quick_item_cooldown" binds= [0]]
+[connection signal="timeout" from="CombatManager/QuickItemCooldown2" to="CombatManager" method="_on_quick_item_cooldown" binds= [1]]

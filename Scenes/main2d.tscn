@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhrs22g70ek2o"]
+
+[ext_resource type="Texture2D" uid="uid://buftt0pxf5hoy" path="res://Assets/ground_textures/ground_rock/ground_rock_atlas.png" id="1_4xb37"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_daxgy"]
+texture = ExtResource("1_4xb37")
+0:0/size_in_atlas = Vector2i(62, 62)
+0:0/0 = 0
+0:62/size_in_atlas = Vector2i(62, 62)
+0:62/0 = 0
+0:124/size_in_atlas = Vector2i(62, 62)
+0:124/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0t4dv"]
+tile_size = Vector2i(1000, 1000)
+sources/3 = SubResource("TileSetAtlasSource_daxgy")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [3, Vector2i(0, 0)], [1, Vector2i(0, 0)], [3, Vector2i(0, 62)], [2, Vector2i(0, 0)], [3, Vector2i(0, 124)]]
+
+[node name="Main2d" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(0.2, 0.2)
+tile_set = SubResource("TileSet_0t4dv")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 3, 0, 1, 3, 0, 65537, 3, 0, 65536, 3, 0, 131072, 3, 0, 131073, 3, 0, 196609, 3, 0, 131074, 3, 0, 131075, 3, 0, 65539, 3, 0, 65538, 3, 0, 2, 3, 0, 131076, 3, 0, 65540, 3, 0, 65541, 3, 0, 5, 3, 0, 4, 3, 0, 3, 3, 0, 65542, 3, 0, 131078, 3, 0, 131077, 3, 0, 196612, 3, 0, 196611, 3, 0, 196610, 3, 0, 196608, 3, 0, 262144, 3, 0, 262145, 3, 0, 262146, 3, 0, 262147, 3, 0, 262148, 3, 0, 262149, 3, 0, 262150, 3, 0, 262151, 3, 0, 262152, 3, 0, 262153, 3, 0, 196617, 3, 0, 196616, 3, 0, 196615, 3, 0, 196614, 3, 0, 196613, 3, 0, 131079, 3, 0, 131080, 3, 0, 131081, 3, 0, 65545, 3, 0, 65544, 3, 0, 8, 3, 0, 7, 3, 0, 6, 3, 0, 65543, 3, 0, 9, 3, 0, 327680, 3, 0, 327681, 3, 0, 327682, 3, 0, 327683, 3, 0, 327684, 3, 0, 327685, 3, 0, 327686, 3, 0, 327687, 3, 0, 327688, 3, 0, 327689, 3, 0)

@@ -1,6 +1,5 @@
 [gd_scene load_steps=30 format=3 uid="uid://cndc48c2sqais"]
 
-[ext_resource type="Script" path="res://Scripts/player_combat.gd" id="1_q5u5q"]
 [ext_resource type="Script" path="res://Scripts/combat_manager.gd" id="1_v6fvh"]
 [ext_resource type="Texture2D" uid="uid://inswaneibnnv" path="res://icon.svg" id="2_hy0sj"]
 [ext_resource type="Script" path="res://Scripts/combat_skill_manager.gd" id="3_4egos"]
@@ -323,6 +322,43 @@ shader_parameter/fill_direction = Vector2(1, 0)
 shader_parameter/unfilled_color = Color(0.333333, 0.333333, 0.333333, 1)
 shader_parameter/filled_color = Color(1, 1, 1, 1)
 
+[sub_resource type="GDScript" id="GDScript_if48h"]
+script/source = "extends CharacterBody2D
+class_name CombatPlayer
+
+signal health_changed(new_health: int)
+
+var max_health = 400 + (PlayerStats.attributes.vigor * 24)
+var health = max_health:
+	set(value):
+		health = value
+		health_changed.emit(value)
+
+@onready var state_machine: StateMachine = $StateMachine
+@onready var move_component: MoveComponent = $MoveComponent
+
+func _ready():
+	state_machine.init(self, $Sprite, move_component)
+
+func _physics_process(delta):
+	state_machine.process_physics(delta)
+
+func _input(event):
+	state_machine.process_input(event)
+
+func damage(amt: int):
+	print(\"ouch!\")
+	#health -= amt
+
+func on_enemy_death(reward: int):
+	#TODO verificar a cura e lr
+	var heal_amt = min(reward, max_health - health)
+	reward -= heal_amt
+	health += heal_amt
+	if reward > 0:
+		PlayerStats.increase_lr(reward)
+"
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1rrrn"]
 animations = [{
 "frames": [],
@@ -342,13 +378,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dttsu"]
 size = Vector2(130, 130)
 
-[node name="Combat" type="Node2D" node_paths=PackedStringArray("turn_cooldown", "combat_ui", "player")]
+[node name="Combat" type="Node2D" node_paths=PackedStringArray("turn_cooldown")]
 process_mode = 3
 process_physics_priority = -1
 script = ExtResource("1_v6fvh")
 turn_cooldown = NodePath("TurnCooldown")
-combat_ui = NodePath("CombatUI")
-player = NodePath("Pausable/Player")
 
 [node name="Boundaries" type="Node2D" parent="."]
 
@@ -376,15 +410,11 @@ position = Vector2(960, 1083)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Bottom"]
 shape = SubResource("WorldBoundaryShape2D_d6n31")
 
-[node name="CombatUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("turn_cooldown", "turn_indicator", "btn_container", "health_bar", "turn_menu_anim")]
+[node name="CombatUI" type="CanvasLayer" parent="."]
+process_mode = 3
 script = ExtResource("5_fnolf")
-turn_cooldown = NodePath("../TurnCooldown")
-turn_indicator = NodePath("MarginContainer/TurnIndicator")
 combat_submenu_btn_scn = ExtResource("3_b1d62")
-btn_container = NodePath("MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonContainer")
 enemy_name_btn_scene = ExtResource("4_5pjec")
-health_bar = NodePath("MarginContainer3/Healthbar")
-turn_menu_anim = NodePath("MarginContainer2/AnimationPlayer")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CombatUI"]
 custom_minimum_size = Vector2(1920, 0)
@@ -488,7 +518,7 @@ process_mode = 1
 [node name="Player" type="CharacterBody2D" parent="Pausable" groups=["player"]]
 position = Vector2(945, 870)
 collision_layer = 5
-script = ExtResource("1_q5u5q")
+script = SubResource("GDScript_if48h")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Pausable/Player"]
 sprite_frames = SubResource("SpriteFrames_1rrrn")
@@ -547,8 +577,9 @@ attack_state = NodePath("../Attack")
 one_shot = true
 
 [node name="BulletEnemy" parent="Pausable" instance=ExtResource("16_nn214")]
-position = Vector2(945, 345)
-scale = Vector2(0.4, 0.4)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0, 945, 345, 0)
+ai_type = 0
+atk_range = 0
 
 [node name="QuickItemCooldown1" type="Timer" parent="."]
 one_shot = true
@@ -561,8 +592,6 @@ wait_time = 0.05
 one_shot = true
 autostart = true
 
-[connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Combat" to="CombatUI" method="_on_submenu_button_up" binds= ["combat"]]
-[connection signal="button_up" from="CombatUI/MarginContainer2/PanelContainer/MarginContainer/SubmenuSelector/Item" to="CombatUI" method="_on_submenu_button_up" binds= ["item"]]
 [connection signal="timeout" from="QuickItemCooldown1" to="." method="_on_quick_item_cooldown" binds= [0]]
 [connection signal="timeout" from="QuickItemCooldown2" to="." method="_on_quick_item_cooldown" binds= [1]]
 [connection signal="timeout" from="TurnCooldown" to="." method="_on_turn_cooldown_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://be6iu86y5xs51"]
+[gd_scene load_steps=32 format=3 uid="uid://be6iu86y5xs51"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_kxhcj"]
 [ext_resource type="Texture2D" uid="uid://2e0wek1eix08" path="res://Assets/Characters/Player/frisk_6walk-removebg-preview.png" id="2_cuiht"]
@@ -23,6 +23,12 @@
 [ext_resource type="Texture2D" uid="uid://cokwarchri5xd" path="res://Assets/Characters/Player/frisk_21walk-removebg-preview.png" id="15_sbcj8"]
 [ext_resource type="Texture2D" uid="uid://b5yilcge2a7lj" path="res://Assets/Characters/Player/frisk_22walk-removebg-preview.png" id="16_3flaf"]
 [ext_resource type="Texture2D" uid="uid://7hlao88hqoa1" path="res://Assets/Characters/Player/frisk_23walk-removebg-preview.png" id="17_yxosc"]
+[ext_resource type="Script" path="res://Scripts/States/state_machine.gd" id="24_237tq"]
+[ext_resource type="Script" path="res://Scripts/Components/move_component.gd" id="24_orsqx"]
+[ext_resource type="Script" path="res://Scripts/States/player_attack.gd" id="25_mvgkn"]
+[ext_resource type="Script" path="res://Scripts/States/player_dash.gd" id="26_bleht"]
+[ext_resource type="Script" path="res://Scripts/States/player_idle.gd" id="27_thjao"]
+[ext_resource type="Script" path="res://Scripts/States/player_move.gd" id="28_da17c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iyo42"]
 size = Vector3(0.512104, 0.940031, 0.134399)
@@ -46,7 +52,7 @@ animations = [{
 "texture": ExtResource("4_7mdau")
 }],
 "loop": true,
-"name": &"walk_down",
+"name": &"move_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -69,7 +75,7 @@ animations = [{
 "texture": ExtResource("12_4o44o")
 }],
 "loop": true,
-"name": &"walk_left",
+"name": &"move_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -92,7 +98,7 @@ animations = [{
 "texture": ExtResource("15_sbcj8")
 }],
 "loop": true,
-"name": &"walk_right",
+"name": &"move_side",
 "speed": 5.0
 }, {
 "frames": [{
@@ -115,7 +121,7 @@ animations = [{
 "texture": ExtResource("5_8uhl4")
 }],
 "loop": true,
-"name": &"walk_up",
+"name": &"move_up",
 "speed": 5.0
 }]
 
@@ -133,4 +139,46 @@ double_sided = false
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_xy2jm")
-animation = &"walk_left"
+animation = &"move_side"
+
+[node name="StateMachine" type="Node3D" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("24_237tq")
+starting_state = NodePath("Idle")
+
+[node name="Attack" type="Node3D" parent="StateMachine"]
+script = ExtResource("25_mvgkn")
+
+[node name="Dash" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("move_state", "dash_timer", "dash_cooldown")]
+script = ExtResource("26_bleht")
+move_state = NodePath("../Move")
+dash_timer = NodePath("../../DashTimer")
+dash_cooldown = NodePath("../../DashCooldown")
+
+[node name="Idle" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("move_state", "attack_state")]
+script = ExtResource("27_thjao")
+move_state = NodePath("../Move")
+attack_state = NodePath("../Attack")
+
+[node name="Move" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("dash_state", "attack_state", "idle_state", "dash_cooldown")]
+script = ExtResource("28_da17c")
+dash_state = NodePath("../Dash")
+attack_state = NodePath("../Attack")
+idle_state = NodePath("../Idle")
+dash_cooldown = NodePath("../../DashCooldown")
+
+[node name="MoveComponent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0104027, -5.96046e-08, 0.00266218)
+script = ExtResource("24_orsqx")
+speed = 150.0
+stop_speed = 50.0
+dash_factor = 3.0
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hand" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.364748, -0.041968, 0)

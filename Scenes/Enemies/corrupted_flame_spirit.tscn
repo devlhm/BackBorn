@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://drddman7um5jy"]
+[gd_scene load_steps=50 format=3 uid="uid://drddman7um5jy"]
 
 [ext_resource type="Script" path="res://Scripts/combat_enemy.gd" id="1_di14r"]
 [ext_resource type="Texture2D" uid="uid://dgb1dgc2g4axc" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front0.png" id="2_1nmgy"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://c2ohmdayjanvc" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back3.png" id="5_qaixx"]
 [ext_resource type="Script" path="res://Scripts/States/enemy_follow.gd" id="5_wi1dg"]
 [ext_resource type="Texture2D" uid="uid://bsa3a8fsaui21" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front4.png" id="6_lrsol"]
-[ext_resource type="Script" path="res://Scripts/States/enemy_idle.gd" id="6_w7rp4"]
 [ext_resource type="Texture2D" uid="uid://ijif6xrbfvnn" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back4.png" id="6_xx04e"]
 [ext_resource type="Texture2D" uid="uid://mp7rmlb0tp16" path="res://Assets/Enemies/corrupted_flame_spirit/front/cfs_front5.png" id="7_glmv2"]
 [ext_resource type="Texture2D" uid="uid://dg8qeargqnfwh" path="res://Assets/Enemies/corrupted_flame_spirit/back/cfs_back5.png" id="7_gm53p"]
@@ -195,16 +194,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vme1w"]
-size = Vector2(130, 130)
+[sub_resource type="BoxShape3D" id="BoxShape3D_g780a"]
+size = Vector3(3, 5, 3)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g410"]
-size = Vector2(436, 657)
+[sub_resource type="BoxShape3D" id="BoxShape3D_3027k"]
+size = Vector3(16, 6, 3)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtxgf"]
-size = Vector2(806, 1108)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fyg72"]
+size = Vector3(3, 5, 3)
 
-[node name="BulletEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "cdwn_timer") groups=["enemy"]]
+[node name="BulletEnemy" type="CharacterBody3D" node_paths=PackedStringArray("hurtbox", "cdwn_timer") groups=["enemy"]]
 collision_layer = 0
 script = ExtResource("1_di14r")
 lvl = 1
@@ -216,29 +215,21 @@ enemy_name = "Corrupted Flame Spirit"
 hurtbox = NodePath("Hurtbox")
 cdwn_timer = NodePath("AttackCooldown")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h75br")
 animation = &"move_up"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_vme1w")
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_g780a")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(4.99999, -147.5)
-shape = SubResource("RectangleShape2D_2g410")
-
-[node name="AttackRange" type="Area2D" parent="."]
+[node name="AttackRange" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(14, -101)
-shape = SubResource("RectangleShape2D_xtxgf")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, 0)
+shape = SubResource("BoxShape3D_3027k")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_twclh")
@@ -246,21 +237,30 @@ starting_state = NodePath("Follow")
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_state")]
 script = ExtResource("4_b346c")
+delay = null
 follow_state = NodePath("../Follow")
+animation_name = null
 
 [node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state", "attack_range")]
 script = ExtResource("5_wi1dg")
 attack_state = NodePath("../Attack")
 attack_range = NodePath("../../AttackRange")
-
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("follow_state")]
-script = ExtResource("6_w7rp4")
-follow_state = NodePath("../Follow")
+animation_name = null
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("7_gsmju")
-speed = 10000.0
+speed = 150.0
 dash_factor = 4.0
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_fyg72")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_entered"]

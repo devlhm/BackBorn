@@ -1,8 +1,6 @@
 extends Node2D
 class_name SkillsMenu
 
-#TODO editar textos com base na parte selecionada
-#TODO adicionar funcionalidade e botao de subir o nivel
 #TODO organizar melhor a ui das setinhas e label
 
 var selected_bodypart
@@ -13,7 +11,7 @@ var selected_bodypart
 func _ready():
 	for part in get_tree().get_nodes_in_group("bodypart"):
 		part.selected.connect(on_bodypart_selected)
-		part.selected.connect(func(bodypart, stat): ui_side.on_stat_selected(stat))
+		part.selected.connect(func(_bodypart, stat): ui_side.on_stat_selected(stat))
 		part.desired_lvl_changed.connect(ui_side.on_desired_lvl_changed)
 	
 	ui_side.level_up_req.connect(level_up)
@@ -30,11 +28,9 @@ func _input(event):
 
 static func get_required_lr(lvl, lvl_max = null):
 	if(lvl_max):
-		var lvl_diff = lvl_max - lvl
 		var acc: int = 0
-		
+
 		for i in range(lvl + 1, lvl_max + 1):
-			print(i)
 			acc += 600 + pow(2*i, 2)
 		return acc
 		

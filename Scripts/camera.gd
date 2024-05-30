@@ -13,6 +13,5 @@ func _physics_process(delta):
 	position = lerp(position, new_pos, delta * smoothSpeed)
 	
 	for node in get_tree().get_nodes_in_group("billboard"):
-		print("achei")
 		node = node as Node3D
 		node.look_at(Vector3(position.x, node.position.y, position.z))

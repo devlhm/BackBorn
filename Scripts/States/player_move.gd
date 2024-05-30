@@ -22,10 +22,12 @@ func process_frame(delta: float) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
-	var direction = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down").normalized()
+	var input_dir = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
+	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 	
-	if(direction == Vector2.ZERO):
+	if(direction == Vector3.ZERO):
 		return idle_state
 		
+	MoveComponent.choose_anim(animations, direction)
 	move_component.move(delta, direction)
 	return null
